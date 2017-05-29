@@ -21,3 +21,15 @@ Creating a reminder
 	* push-notification (yes|no)
 * Other notification ways
 	* E-Mail
+
+# Technology
+
+## Client (Android)
+* Android studio (so basically Java)
+* SQLite database
+
+## Server
+* Go
+	* RESTful API over HTTP
+* Docker
+* MySQL database
