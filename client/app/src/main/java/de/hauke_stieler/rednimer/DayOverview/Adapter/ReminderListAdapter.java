@@ -39,7 +39,7 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
         titleTextView.setText(getItem(position).getTitle());
 
         TextView dueDateTextView = (TextView) view.findViewById(R.id.reminderDueDateTextView);
-        dueDateTextView.setText(getItem(position).getDueDate());
+        dueDateTextView.setText(getItem(position).getRemindingDescription());
 
         return view;
     }
