@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 
@@ -19,21 +21,23 @@ import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
  */
 public class ReminderLister extends Fragment {
 
-    private ArrayAdapter<Reminder> _listItemAdapter;
+    private IReminderService _reminderService;
     private Date _date;
+    private ArrayAdapter<Reminder> _listItemAdapter;
 
     public ReminderLister() {
     }
 
-    public static ReminderLister newInstance(Date date) {
+    public static ReminderLister newInstance(IReminderService reminderService, Date date) {
         ReminderLister reminderLister = new ReminderLister();
 
+        reminderLister._reminderService = reminderService;
         reminderLister._date = date;
 
         return reminderLister;
     }
 
-    public Date getDate(){
+    public Date getDate() {
         return (Date) _date.clone();
     }
 
@@ -42,9 +46,10 @@ public class ReminderLister extends Fragment {
         super.onCreate(savedInstanceState);
 
         ArrayList<Reminder> reminderListItems = new ArrayList<>();
-        reminderListItems.add(new Reminder(_date));
-        reminderListItems.add(new Reminder(_date));
-        reminderListItems.add(new Reminder(_date));
+        Collection<Reminder> reminders = _reminderService.getAll(_date);
+        if (reminders != null) {
+            reminderListItems.addAll(reminders);
+        }
 
         _listItemAdapter = new ReminderListAdapter(getContext(), R.layout.fragment_reminder_list_item, reminderListItems);
     }

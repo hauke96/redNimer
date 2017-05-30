@@ -9,8 +9,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.hauke_stieler.rednimer.AppContext.ServiceLocator;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.DayOverview.View.ReminderListItem;
 import de.hauke_stieler.rednimer.DayOverview.View.ReminderLister;
+import juard.injection.Locator;
 
 /**
  * Created by hauke on 30.05.17.
@@ -25,6 +28,7 @@ public class DayOverviewPagerAdapter extends FragmentPagerAdapter {
 
     public DayOverviewPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
+
         _items = new ArrayList<>();
     }
 
@@ -38,7 +42,7 @@ public class DayOverviewPagerAdapter extends FragmentPagerAdapter {
         calendar.add(Calendar.DAY_OF_MONTH, offset);
         Date date = calendar.getTime();
 
-        ReminderLister reminderLister = ReminderLister.newInstance(date);
+        ReminderLister reminderLister = ReminderLister.newInstance(Locator.get(IReminderService.class), date);
 
         return reminderLister;
     }
