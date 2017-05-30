@@ -42,9 +42,9 @@ public class ReminderLister extends Fragment {
         super.onCreate(savedInstanceState);
 
         ArrayList<Reminder> reminderListItems = new ArrayList<>();
-        reminderListItems.add(new Reminder());
-        reminderListItems.add(new Reminder());
-        reminderListItems.add(new Reminder());
+        reminderListItems.add(new Reminder(_date));
+        reminderListItems.add(new Reminder(_date));
+        reminderListItems.add(new Reminder(_date));
 
         _listItemAdapter = new ReminderListAdapter(getContext(), R.layout.fragment_reminder_list_item, reminderListItems);
     }

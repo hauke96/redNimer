@@ -24,14 +24,10 @@ public class DayOverviewPagerAdapter extends FragmentPagerAdapter {
     public static final int INITIAL_POSITION = ITEM_COUNT / 2;
 
     private List<ReminderListItem> _items;
-    private Date _initialDate;
 
     public DayOverviewPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         _items = new ArrayList<>();
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        _initialDate = calendar.getTime();
     }
 
     @Override
