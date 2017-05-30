@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.ReminderLister;
+package de.hauke_stieler.rednimer.DayOverview.View;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import de.hauke_stieler.rednimer.Common.Reminder;
 import de.hauke_stieler.rednimer.R;
+import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 
 /**
  */

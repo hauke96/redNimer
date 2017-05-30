@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.ReminderLister;
+package de.hauke_stieler.rednimer.DayOverview.Adapter;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,7 +1,6 @@
-package de.hauke_stieler.rednimer.ReminderLister;
+package de.hauke_stieler.rednimer.DayOverview.View;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

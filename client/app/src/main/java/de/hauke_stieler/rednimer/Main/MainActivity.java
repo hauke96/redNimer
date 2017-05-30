@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import de.hauke_stieler.rednimer.R;
-import de.hauke_stieler.rednimer.ReminderLister.ReminderLister;
+import de.hauke_stieler.rednimer.DayOverview.View.ReminderLister;
 
 public class MainActivity extends AppCompatActivity {
 
