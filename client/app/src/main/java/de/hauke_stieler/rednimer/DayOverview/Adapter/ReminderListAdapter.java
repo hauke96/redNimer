@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import de.hauke_stieler.rednimer.Common.Reminder;
+import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.R;
 
 /**

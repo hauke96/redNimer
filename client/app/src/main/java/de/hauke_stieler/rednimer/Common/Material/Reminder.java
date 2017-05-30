@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.Common;
+package de.hauke_stieler.rednimer.Common.Material;
 
 import java.util.Date;
 
