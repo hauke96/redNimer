@@ -50,18 +50,21 @@ public class DayOverview extends Fragment {
 
         final DayOverviewPagerAdapter pagerAdapter = new DayOverviewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(pagerAdapter.INITIAL_POSITION);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                ReminderLister item = pagerAdapter.getItem(position);
-                Date date = item.getDate();
-
+                Date date = getSelectedDate(position, pagerAdapter);
                 setTitleToDate(date);
             }
         });
+        viewPager.setCurrentItem(pagerAdapter.INITIAL_POSITION);
 
         return dayOverview;
+    }
+
+    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
+        ReminderLister item = pagerAdapter.getItem(position);
+        return item.getDate();
     }
 
     private void setTitleToDate(Date date) {
