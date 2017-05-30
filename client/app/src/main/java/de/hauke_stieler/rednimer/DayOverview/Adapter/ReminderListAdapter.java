@@ -8,18 +8,27 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Collection;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.R;
+import juard.contract.Contract;
 
 /**
  * Created by hauke on 30.05.17.
  */
 public class ReminderListAdapter extends ArrayAdapter<Reminder> {
 
-    public ReminderListAdapter(Context context, int resource, List<Reminder> objects) {
+    private ReminderListAdapter(Context context, int resource, List<Reminder> objects) {
         super(context, resource, objects);
+    }
+
+    public static ReminderListAdapter getInstance(Context context, int resource, List<Reminder> objects) {
+        Contract.RequireNotNull(context);
+        Contract.RequireNotNull(objects);
+
+        return new ReminderListAdapter(context, resource, objects);
     }
 
     @Override
