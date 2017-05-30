@@ -1,9 +1,7 @@
 package de.hauke_stieler.rednimer.DayOverview.Adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;

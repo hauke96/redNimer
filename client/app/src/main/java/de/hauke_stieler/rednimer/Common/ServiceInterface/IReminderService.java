@@ -1,5 +1,6 @@
 package de.hauke_stieler.rednimer.Common.ServiceInterface;
 
+import java.util.Collection;
 import java.util.Date;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
@@ -10,5 +11,5 @@ import de.hauke_stieler.rednimer.Common.Material.Reminder;
 public interface IReminderService {
     void add(Reminder reminder);
 
-    void getAll(Date date);
+    Collection<Reminder> getAll(Date date);
 }
