@@ -9,20 +9,11 @@ import android.view.ViewGroup;
 
 import de.hauke_stieler.rednimer.R;
 
-/**
- */
 public class ReminderListItem extends Fragment {
 
     public ReminderListItem() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ReminderListItem.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReminderListItem newInstance() {
         ReminderListItem fragment = new ReminderListItem();
         return fragment;

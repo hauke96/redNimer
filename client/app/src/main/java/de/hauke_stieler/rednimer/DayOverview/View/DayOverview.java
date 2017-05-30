@@ -25,12 +25,6 @@ public class DayOverview extends Fragment {
         _dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment DayOverview.
-     */
     public static DayOverview newInstance() {
         DayOverview fragment = new DayOverview();
         return fragment;

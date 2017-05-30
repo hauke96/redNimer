@@ -2,6 +2,7 @@ package de.hauke_stieler.rednimer.DayOverview.View;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 
-/**
- */
 public class ReminderLister extends Fragment {
 
     private IReminderService _reminderService;
@@ -45,13 +45,12 @@ public class ReminderLister extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Reminder> reminderListItems = new ArrayList<>();
-        Collection<Reminder> reminders = _reminderService.getAll(_date);
-        if (reminders != null) {
-            reminderListItems.addAll(reminders);
+        List<Reminder> reminders = _reminderService.getAll(_date);
+        if(reminders == null){
+            reminders = new ArrayList<>();
         }
 
-        _listItemAdapter = new ReminderListAdapter(getContext(), R.layout.fragment_reminder_list_item, reminderListItems);
+        _listItemAdapter = ReminderListAdapter.getInstance(getContext(), R.layout.fragment_reminder_list_item, reminders);
     }
 
     @Override
@@ -61,7 +60,11 @@ public class ReminderLister extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reminder_lister, container, false);
 
         ListView itemListView = (ListView) view.findViewById(R.id.reminderItemListView);
-        itemListView.setAdapter(_listItemAdapter);
+
+        Log.i("adapter state", "date: " + _date.toString() + "; adapter: " + _listItemAdapter);
+        if (_listItemAdapter != null) {
+            itemListView.setAdapter(_listItemAdapter);
+        }
 
         return view;
     }

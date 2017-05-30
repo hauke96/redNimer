@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import de.hauke_stieler.rednimer.AppContext.ServiceLocator;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.DayOverview.View.ReminderListItem;
 import de.hauke_stieler.rednimer.DayOverview.View.ReminderLister;
@@ -39,7 +38,7 @@ public class DayOverviewPagerAdapter extends FragmentPagerAdapter {
         // Get the date of the lister depending on the selected page.
         // Page 0 is the current date (=today).
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.DAY_OF_MONTH, offset);
+        calendar.add(Calendar.DATE, offset);
         Date date = calendar.getTime();
 
         ReminderLister reminderLister = ReminderLister.newInstance(Locator.get(IReminderService.class), date);
