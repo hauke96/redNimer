@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hauke_stieler.rednimer.Common.Reminder;
 import de.hauke_stieler.rednimer.R;
@@ -19,19 +20,21 @@ import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 public class ReminderLister extends Fragment {
 
     private ArrayAdapter<Reminder> _listItemAdapter;
+    private Date _date;
 
     public ReminderLister() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ReminderLister.
-     */
-    public static ReminderLister newInstance() {
-        ReminderLister fragment = new ReminderLister();
-        return fragment;
+    public static ReminderLister newInstance(Date date) {
+        ReminderLister reminderLister = new ReminderLister();
+
+        reminderLister._date = date;
+
+        return reminderLister;
+    }
+
+    public Date getDate(){
+        return (Date) _date.clone();
     }
 
     @Override
