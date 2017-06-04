@@ -12,4 +12,10 @@
         <item name="android:background">@color/lightGray</item>
     </style>
 
+    <style name="SwitchStyle">
+        <item name="colorControlActivated">@color/mediumGray</item>
+        <item name="colorSwitchThumbNormal">@color/mediumGray</item>
+        <item name="android:colorForeground">@color/mediumGray</item>
+    </style>
+
 </resources>
