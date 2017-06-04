@@ -19,13 +19,5 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New reminder");
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.reminderCreatorViewPager);
-        viewPager.setAdapter(new ReminderCreatorPagerAdapter(getSupportFragmentManager()));
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-            }
-        });
     }
 }
