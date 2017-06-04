@@ -30,6 +30,19 @@ public class DayOverview extends Fragment {
         return fragment;
     }
 
+    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
+        ReminderLister item = pagerAdapter.getItem(position);
+        return item.getDate();
+    }
+
+    private void setTitleToDate(Date date) {
+        String dateString = _dateFormat.format(date);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle(dateString);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +66,17 @@ public class DayOverview extends Fragment {
         });
         viewPager.setCurrentItem(pagerAdapter.INITIAL_POSITION);
 
+        registerListener(dayOverview);
+
         return dayOverview;
     }
 
-    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
-        ReminderLister item = pagerAdapter.getItem(position);
-        return item.getDate();
+    private void registerListener(View dayOverview) {
+        dayOverview.findViewById(R.id.addReminderButton);
     }
 
-    private void setTitleToDate(Date date) {
-        String dateString = _dateFormat.format(date);
+    @SuppressWarnings("unused")
+    public void addReminderButton_OnClick(View view){
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setTitle(dateString);
     }
 }
