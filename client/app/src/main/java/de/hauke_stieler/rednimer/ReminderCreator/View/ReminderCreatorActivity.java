@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.ReminderCreator;
+package de.hauke_stieler.rednimer.ReminderCreator.View;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;

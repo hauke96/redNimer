@@ -17,7 +17,7 @@ import java.util.Date;
 
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
-import de.hauke_stieler.rednimer.ReminderCreator.ReminderCreatorActivity;
+import de.hauke_stieler.rednimer.ReminderCreator.View.ReminderCreatorActivity;
 
 public class DayOverview extends Fragment {
 

@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".ReminderCreator.ReminderCreatorActivity"
+            android:name=".ReminderCreator.View.ReminderCreatorActivity"
             android:parentActivityName=".Main.MainActivity"></activity>
 
     </application>
