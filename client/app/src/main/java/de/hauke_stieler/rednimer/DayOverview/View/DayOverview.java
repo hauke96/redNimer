@@ -1,5 +1,6 @@
 package de.hauke_stieler.rednimer.DayOverview.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,7 @@ import java.util.Date;
 
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
+import de.hauke_stieler.rednimer.ReminderCreator.ReminderCreatorActivity;
 
 public class DayOverview extends Fragment {
 
@@ -72,11 +74,11 @@ public class DayOverview extends Fragment {
     }
 
     private void registerListener(View dayOverview) {
-        dayOverview.findViewById(R.id.addReminderButton);
+        dayOverview.findViewById(R.id.addReminderButton).setOnClickListener(v -> addReminderButton_OnClick());
     }
 
-    @SuppressWarnings("unused")
-    public void addReminderButton_OnClick(View view){
-
+    public void addReminderButton_OnClick(){
+        Intent intent = new Intent(getContext(), ReminderCreatorActivity.class);
+        startActivity(intent);
     }
 }
