@@ -32,6 +32,13 @@ public class DayOverview extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //TODO reload reminder
+    }
+
     private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
         ReminderLister item = pagerAdapter.getItem(position);
         return item.getDate();
@@ -77,7 +84,7 @@ public class DayOverview extends Fragment {
         dayOverview.findViewById(R.id.addReminderButton).setOnClickListener(v -> addReminderButton_OnClick());
     }
 
-    public void addReminderButton_OnClick(){
+    public void addReminderButton_OnClick() {
         Intent intent = new Intent(getContext(), ReminderCreatorActivity.class);
         startActivity(intent);
     }
