@@ -33,26 +33,6 @@ public class DayOverview extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        //TODO reload reminder
-    }
-
-    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
-        ReminderLister item = pagerAdapter.getItem(position);
-        return item.getDate();
-    }
-
-    private void setTitleToDate(Date date) {
-        String dateString = _dateFormat.format(date);
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setTitle(dateString);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -78,6 +58,26 @@ public class DayOverview extends Fragment {
         registerListener(dayOverview);
 
         return dayOverview;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //TODO reload reminder
+    }
+
+    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
+        ReminderLister item = pagerAdapter.getItem(position);
+        return item.getDate();
+    }
+
+    private void setTitleToDate(Date date) {
+        String dateString = _dateFormat.format(date);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle(dateString);
     }
 
     private void registerListener(View dayOverview) {
