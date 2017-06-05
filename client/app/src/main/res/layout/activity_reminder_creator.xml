@@ -298,10 +298,9 @@
 
         <Button
             android:id="@+id/creatorSaveButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/SimpleButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:height="50dp"
             android:text="Save" />
 
     </LinearLayout>

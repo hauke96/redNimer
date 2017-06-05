@@ -8,8 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AddButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@color/lightGray</item>
+    <style name="SimpleButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/mediumLightGray</item>
+        <item name="android:height">50dp</item>
     </style>
 
     <style name="SwitchStyle">

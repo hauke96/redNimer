@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_alarm_black_32dp"
             android:textSize="@dimen/header_font_size"
-            style="@style/AddButtonStyle" />
+            style="@style/SimpleButtonStyle" />
 
     </LinearLayout>
 
