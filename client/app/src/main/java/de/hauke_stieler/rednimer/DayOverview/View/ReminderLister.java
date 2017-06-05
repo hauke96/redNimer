@@ -18,6 +18,7 @@ import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 import juard.contract.Contract;
@@ -85,7 +86,6 @@ public class ReminderLister extends Fragment {
             Calendar itemDate = GregorianCalendar.getInstance();
             itemDate.setTime(((Reminder) item).getDueDate());
 
-            Log.i("Add items", "compare: " + date.get(Calendar.DAY_OF_YEAR) + " - " + itemDate.get(Calendar.DAY_OF_YEAR) + "     ---     " + date.get(Calendar.YEAR) + " - " + itemDate.get(Calendar.YEAR));
             containsRelevantItem |= date.get(Calendar.DAY_OF_YEAR) == itemDate.get(Calendar.DAY_OF_YEAR) && date.get(Calendar.YEAR) == itemDate.get(Calendar.YEAR);
         }
 
@@ -94,7 +94,7 @@ public class ReminderLister extends Fragment {
          */
         if (containsRelevantItem) {
             reloadItems();
-            Log.i("Add items", "Reloaded items for date " + _date.toString());
+            Log.i("Add items", "Reloaded items for date " + DateTimeFormatter.formatDate(_date));
         }
     }
 

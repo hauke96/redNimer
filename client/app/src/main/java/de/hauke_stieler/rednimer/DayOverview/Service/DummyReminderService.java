@@ -1,5 +1,7 @@
 package de.hauke_stieler.rednimer.DayOverview.Service;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 
 /**
  * Created by hauke on 30.05.17.
@@ -19,48 +22,51 @@ import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService
 public class DummyReminderService extends AbstractReminderService {
 
     private Map<String, List<Reminder>> _reminderMap;
-    private DateFormat _dateFormater;
+    private DateFormat _dateFormatter;
 
     public DummyReminderService() {
         _reminderMap = new HashMap<>();
-        _dateFormater = new SimpleDateFormat("yyyy-MM-dd");
-
+        _dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.DAY_OF_MONTH, -5);
-        Date date;
 
-        for (int i = 0; i < 10; i++) {
-            date = calendar.getTime();
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 00);
+        add(new Reminder("Einkaufen", "* Nudeln\n*Wasser\n*Bier", calendar));
 
-            // generate some random amount of reminder
-            int r = (int) (Math.random() * 6);
-            for (int j = 0; j < r; j++) {
-                add(new Reminder("A great reminder" + i, "Some useful description", date));
-            }
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 30);
+        add(new Reminder("Lernen", "Für Mathe lernen", calendar));
 
-            // go to next day
-            calendar.add(Calendar.DATE, 1);
-        }
+        // go to next day
+        calendar.add(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 00);
+        add(new Reminder("Arzt", "Um 13:15 Zahnarzt", calendar));
+
+        // go to next day
+        calendar.add(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 30);
+        add(new Reminder("Freunde", "Freunde in der Kneipe treffen", calendar));
     }
 
     @Override
     public void add(Reminder reminder) {
-        String date = _dateFormater.format(reminder.getDueDate());
+        String date = _dateFormatter.format(reminder.getDueDate());
         boolean keyAlreadyExists = _reminderMap.containsKey(date);
 
         if (!keyAlreadyExists) {
             _reminderMap.put(date, new ArrayList<>());
-            ReminderAdded.fireEvent(new Reminder[]{reminder});
         }
 
         _reminderMap.get(date).add(reminder);
-
+        ReminderAdded.fireEvent(new Reminder[]{reminder});
     }
 
     @Override
     public List<Reminder> getAll(Date date) {
-        String dateString = _dateFormater.format(date);
+        String dateString = _dateFormatter.format(date);
 
         return _reminderMap.get(dateString);
     }
