@@ -12,12 +12,10 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.R;
 import juard.contract.Contract;
 import juard.injection.Locator;
@@ -28,14 +26,14 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
     private Calendar _selectedDate;
 
-    private IReminderService _reminderService;
+    private AbstractReminderService _reminderService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_creator);
 
-        _reminderService = Locator.get(IReminderService.class);
+        _reminderService = Locator.get(AbstractReminderService.class);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Reminder editor");

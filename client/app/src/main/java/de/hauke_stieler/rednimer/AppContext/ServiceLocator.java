@@ -1,6 +1,6 @@
 package de.hauke_stieler.rednimer.AppContext;
 
-import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.DayOverview.Service.DummyReminderService;
 import juard.injection.Locator;
 
@@ -9,6 +9,6 @@ import juard.injection.Locator;
  */
 public class ServiceLocator {
     public static void registerAll(){
-        Locator.register(IReminderService.class, () -> new DummyReminderService());
+        Locator.register(AbstractReminderService.class, () -> new DummyReminderService());
     }
 }

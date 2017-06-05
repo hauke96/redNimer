@@ -10,19 +10,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 import juard.contract.Contract;
 
 public class ReminderLister extends Fragment {
 
-    private IReminderService _reminderService;
+    private AbstractReminderService _reminderService;
     private Date _date;
     private ArrayAdapter<Reminder> _listItemAdapter;
 
@@ -30,7 +32,7 @@ public class ReminderLister extends Fragment {
 
     }
 
-    public static ReminderLister newInstance(IReminderService reminderService, Date date) {
+    public static ReminderLister newInstance(AbstractReminderService reminderService, Date date) {
         Contract.RequireNotNull(reminderService);
         Contract.RequireNotNull(date);
 
@@ -51,6 +53,9 @@ public class ReminderLister extends Fragment {
         super.onCreate(savedInstanceState);
 
         _listItemAdapter = ReminderListAdapter.getInstance(getContext(), R.layout.fragment_reminder_list_item);
+
+        _reminderService.ReminderAdded.add(objects -> reloadItems(objects));
+
         reloadItems();
     }
 
@@ -70,12 +75,35 @@ public class ReminderLister extends Fragment {
         return view;
     }
 
+    private void reloadItems(Object... items) {
+        boolean containsRelevantItem = false;
+
+        Calendar date = GregorianCalendar.getInstance();
+        date.setTime(_date);
+
+        for (Object item : items) {
+            Calendar itemDate = GregorianCalendar.getInstance();
+            itemDate.setTime(((Reminder) item).getDueDate());
+
+            containsRelevantItem |= date.get(Calendar.DATE) == itemDate.get(Calendar.DATE);
+        }
+
+        /*
+        There won't be many items to go through (probably less then 1000), so it's not necessary yet to go through all items passed here and add them if they're not in the adapter.
+         */
+        if (containsRelevantItem) {
+            reloadItems();
+            Log.i("Add items", "Reloaded items for date " + _date.toString());
+        }
+    }
+
     public void reloadItems() {
         List<Reminder> reminders = _reminderService.getAll(_date);
-        if(reminders == null){
+        if (reminders == null) {
             reminders = new ArrayList<>();
         }
 
+        _listItemAdapter.clear();
         _listItemAdapter.addAll(reminders);
     }
 }
