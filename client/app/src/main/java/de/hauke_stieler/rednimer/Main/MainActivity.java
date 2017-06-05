@@ -1,7 +1,7 @@
 package de.hauke_stieler.rednimer.Main;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import de.hauke_stieler.rednimer.AppContext.ServiceLocator;
 import de.hauke_stieler.rednimer.DayOverview.View.DayOverview;
