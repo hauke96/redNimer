@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Title and description"
-                android:textColor="@color/mediumGray" />
+                android:textColor="@color/colorPrimaryMedium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="5dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shadow" />
 
@@ -81,7 +81,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_margin="5dp"
                     android:text="Due to"
-                    android:textColor="@color/mediumGray" />
+                    android:textColor="@color/colorPrimaryMedium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
                     android:text="(tap to choose)"
-                    android:textColor="@color/mediumGray" />
+                    android:textColor="@color/colorPrimaryMedium" />
 
             </RelativeLayout>
 
@@ -126,7 +126,7 @@
             -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="5dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shadow" />
 
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Notifications"
-                android:textColor="@color/mediumGray" />
+                android:textColor="@color/colorPrimaryMedium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,7 +186,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/mediumLightGray" />
+                    android:background="@color/colorPrimaryLight" />
 
                 <!--
                 Frequency
@@ -275,7 +275,7 @@
             -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="5dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shadow" />
 
@@ -294,7 +294,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/mediumGray" />
+            android:background="@color/colorPrimaryMedium" />
 
         <Button
             android:id="@+id/creatorSaveButton"

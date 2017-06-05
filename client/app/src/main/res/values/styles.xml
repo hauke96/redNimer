@@ -9,14 +9,14 @@
     </style>
 
     <style name="SimpleButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@color/mediumLightGray</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
         <item name="android:height">50dp</item>
     </style>
 
     <style name="SwitchStyle">
-        <item name="colorControlActivated">@color/mediumGray</item>
-        <item name="colorSwitchThumbNormal">@color/mediumGray</item>
-        <item name="android:colorForeground">@color/mediumGray</item>
+        <item name="colorControlActivated">@color/colorPrimaryMedium</item>
+        <item name="colorSwitchThumbNormal">@color/colorPrimaryMedium</item>
+        <item name="android:colorForeground">@color/colorPrimaryMedium</item>
     </style>
 
 </resources>

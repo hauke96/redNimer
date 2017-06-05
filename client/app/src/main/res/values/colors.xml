@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    All color are from the google color palette:
+
+        https://material.io/guidelines/style/color.html#color-color-palette
+
+    If there's no color name in front of a number, the app-color is meant.
+
+    Current app-color: "Brown"
+    -->
+
+    <!-- 100 -->
+    <color name="colorPrimaryLight">#BCAAA4</color>
+    <!-- 200 -->
+    <color name="colorPrimaryMedium">#A1887F</color>
+    <!-- 400 -->
+    <color name="colorAccent">#8D6E63</color>
     <!-- 500 -->
     <color name="colorPrimary">#795548</color>
     <!-- 600 -->
     <color name="colorPrimaryDark">#6D4C41</color>
-    <!-- 400 -->
-    <color name="colorAccent">#8D6E63</color>
 
     <!-- pure white -->
     <color name="defaultBackground">#FFFFFF</color>
     <!-- gray 200 -->
     <color name="lightGray">#EEEEEE</color>
-    <!-- 200 -->
-    <color name="mediumGray">#A1887F</color>
-    <!-- 100 -->
-    <color name="mediumLightGray">#BCAAA4</color>
+    <!-- gray 500 -->
+    <color name="mediumGray">#9E9E9E</color>
 </resources>
