@@ -106,7 +106,7 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void setTimeText(TextView view, Calendar date) {
-        view.setText("at " + _timeFormat.format(date.getTime()));
+        view.setText(_timeFormat.format(date.getTime()));
     }
 
     private void saveReminder() {

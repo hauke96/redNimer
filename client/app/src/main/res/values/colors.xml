@@ -11,8 +11,10 @@
     -->
 
     <!-- 100 -->
-    <color name="colorPrimaryLight">#BCAAA4</color>
+    <color name="colorPrimaryVeryLight">#EFEBE9</color>
     <!-- 200 -->
+    <color name="colorPrimaryLight">#BCAAA4</color>
+    <!-- 300 -->
     <color name="colorPrimaryMedium">#A1887F</color>
     <!-- 400 -->
     <color name="colorAccent">#8D6E63</color>

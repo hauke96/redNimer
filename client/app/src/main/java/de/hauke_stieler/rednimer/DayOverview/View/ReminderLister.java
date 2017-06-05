@@ -66,7 +66,6 @@ public class ReminderLister extends Fragment {
 
         ListView itemListView = (ListView) view.findViewById(R.id.reminderItemListView);
 
-        Log.i("adapter state", "date: " + _date.toString() + "; adapter: " + _listItemAdapter);
         if (_listItemAdapter != null) {
             itemListView.setAdapter(_listItemAdapter);
         }
