@@ -27,7 +27,7 @@ public class Reminder {
     }
 
     public Date getDueDate() {
-        return _dueDate;
+        return (Date) _dueDate.clone();
     }
 
     public String getRemindingDescription() {
