@@ -20,13 +20,19 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
         SwitchCompat switchControl = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
         switchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                findViewById(R.id.creatorFrequencyLayout).setVisibility(View.VISIBLE);
-                findViewById(R.id.creatorBeforeLayout).setVisibility(View.GONE);
-            } else {
-                findViewById(R.id.creatorFrequencyLayout).setVisibility(View.GONE);
-                findViewById(R.id.creatorBeforeLayout).setVisibility(View.VISIBLE);
-            }
+            toggleNotificationLayoutVisibility(isChecked);
         });
+
+        toggleNotificationLayoutVisibility(false);
+    }
+
+    private void toggleNotificationLayoutVisibility(boolean beforeLayoutChosen) {
+        if (beforeLayoutChosen) {
+            findViewById(R.id.creatorFrequencyLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.creatorBeforeLayout).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.creatorFrequencyLayout).setVisibility(View.GONE);
+            findViewById(R.id.creatorBeforeLayout).setVisibility(View.VISIBLE);
+        }
     }
 }
