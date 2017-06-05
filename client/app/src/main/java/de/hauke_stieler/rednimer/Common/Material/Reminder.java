@@ -1,7 +1,6 @@
 package de.hauke_stieler.rednimer.Common.Material;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 
@@ -24,8 +23,8 @@ public class Reminder {
         return _title;
     }
 
-    public Date getDueDate() {
-        return (Date) _dueDate.getTime().clone();
+    public Calendar getDueDate() {
+        return (Calendar) _dueDate.clone();
     }
 
     public String getDueDateDescription() {

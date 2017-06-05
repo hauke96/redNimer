@@ -49,7 +49,7 @@ public class DummyReminderService extends AbstractReminderService {
 
     @Override
     public void add(Reminder reminder) {
-        String date = _dateFormatter.format(reminder.getDueDate());
+        String date = _dateFormatter.format(reminder.getDueDate().getTime());
         boolean keyAlreadyExists = _reminderMap.containsKey(date);
 
         if (!keyAlreadyExists) {
@@ -62,7 +62,7 @@ public class DummyReminderService extends AbstractReminderService {
 
     @Override
     public List<Reminder> getAll(Calendar date) {
-        String dateString = _dateFormatter.format(date);
+        String dateString = _dateFormatter.format(date.getTime());
 
         return _reminderMap.get(dateString);
     }

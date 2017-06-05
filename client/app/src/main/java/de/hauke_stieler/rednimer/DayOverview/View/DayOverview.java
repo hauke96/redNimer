@@ -11,21 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Calendar;
 
+import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.ReminderCreator.View.ReminderCreatorActivity;
 
 public class DayOverview extends Fragment {
 
-    private DateFormat _dateFormat;
     private boolean _isResumed;
 
     public DayOverview() {
-        _dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.GERMANY);
     }
 
     public static DayOverview newInstance() {
@@ -50,7 +47,7 @@ public class DayOverview extends Fragment {
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                Date date = getSelectedDate(position, pagerAdapter);
+                Calendar date = getSelectedDate(position, pagerAdapter);
                 setTitleToDate(date);
             }
         });
@@ -83,13 +80,13 @@ public class DayOverview extends Fragment {
         _isResumed = true;
     }
 
-    private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
+    private Calendar getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
         ReminderLister item = pagerAdapter.getItem(position);
         return item.getDate();
     }
 
-    private void setTitleToDate(Date date) {
-        String dateString = _dateFormat.format(date);
+    private void setTitleToDate(Calendar date) {
+        String dateString = DateTimeFormatter.formatDate(date);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();

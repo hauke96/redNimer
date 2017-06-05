@@ -78,8 +78,7 @@ public class ReminderLister extends Fragment {
         boolean containsRelevantItem = false;
 
         for (Object item : items) {
-            Calendar itemDate = GregorianCalendar.getInstance();
-            itemDate.setTime(((Reminder) item).getDueDate());
+            Calendar itemDate = ((Reminder) item).getDueDate();
 
             containsRelevantItem |= _date.get(Calendar.DAY_OF_YEAR) == itemDate.get(Calendar.DAY_OF_YEAR) && _date.get(Calendar.YEAR) == itemDate.get(Calendar.YEAR);
         }
