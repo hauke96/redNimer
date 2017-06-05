@@ -16,29 +16,44 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import de.hauke_stieler.rednimer.Common.Material.Reminder;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.R;
+import juard.contract.Contract;
+import juard.injection.Locator;
 
 public class ReminderCreatorActivity extends AppCompatActivity {
-    private static DateFormat _dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.GERMANY);
+    private static DateFormat _dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private static DateFormat _timeFormat = new SimpleDateFormat("HH:mm");
+
+    private Calendar _selectedDate;
+
+    private IReminderService _reminderService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_creator);
 
+        _reminderService = Locator.get(IReminderService.class);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Reminder editor");
 
         registerListener();
 
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.add(Calendar.DATE, 1);
+        _selectedDate = GregorianCalendar.getInstance();
+        _selectedDate.add(Calendar.DATE, 1);
 
-        setDateText((TextView) findViewById(R.id.creatorChooseDateTextView), calendar.getTime());
-        setTimeText((TextView) findViewById(R.id.creatorChooseTimeTextView), calendar.getTime());
+        setDateText((TextView) findViewById(R.id.creatorChooseDateTextView), _selectedDate);
+        setTimeText((TextView) findViewById(R.id.creatorChooseTimeTextView), _selectedDate);
 
         toggleNotificationLayoutVisibility(false);
+
+        Contract.EnsureNotNull(_dateFormat);
+        Contract.EnsureNotNull(_timeFormat);
+        Contract.EnsureNotNull(_selectedDate);
+        Contract.EnsureNotNull(_reminderService);
     }
 
     private void registerListener() {
@@ -49,6 +64,8 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
         findViewById(R.id.creatorChooseDateTextView).setOnClickListener(v -> creatorChooseDateTextView_OnClick((TextView) v));
         findViewById(R.id.creatorChooseTimeTextView).setOnClickListener(v -> creatorChooseTimeTextView_OnClick((TextView) v));
+
+        findViewById(R.id.creatorSaveButton).setOnClickListener(v -> saveReminder());
     }
 
     private void toggleNotificationLayoutVisibility(boolean beforeLayoutChosen) {
@@ -64,30 +81,40 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     private void creatorChooseDateTextView_OnClick(TextView view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), (dialogView, year, monthOfYear, dayOfMonth) ->
         {
-            GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-            setDateText(view, calendar.getTime());
+            _selectedDate.set(Calendar.YEAR, year);
+            _selectedDate.set(Calendar.MONTH, monthOfYear);
+            _selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            setDateText(view, _selectedDate);
         },
                 2017, 06, 05);
         datePickerDialog.show();
     }
 
     private void creatorChooseTimeTextView_OnClick(TextView view) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), (view1, hourOfDay, minute) -> {
-            GregorianCalendar calendar = new GregorianCalendar();
+        TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), (view1, hourOfDay, minute) ->
+        {
+            _selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            _selectedDate.set(Calendar.MINUTE, minute);
 
-            calendar.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay);
-            calendar.set(GregorianCalendar.MINUTE, minute);
-
-            setTimeText(view, calendar.getTime());
+            setTimeText(view, _selectedDate);
         }, 12, 0, true);
         timePickerDialog.show();
     }
 
-    private void setDateText(TextView view, Date date) {
+    private void setDateText(TextView view, Calendar date) {
         view.setText(_dateFormat.format(date.getTime()));
     }
 
-    private void setTimeText(TextView view, Date date) {
+    private void setTimeText(TextView view, Calendar date) {
         view.setText("at " + _timeFormat.format(date.getTime()));
+    }
+
+    private void saveReminder() {
+        Reminder reminder = new Reminder(_selectedDate.getTime());
+
+        _reminderService.add(reminder);
+
+        onBackPressed();
     }
 }

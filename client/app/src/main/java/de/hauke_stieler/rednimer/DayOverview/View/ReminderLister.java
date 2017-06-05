@@ -50,12 +50,8 @@ public class ReminderLister extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        List<Reminder> reminders = _reminderService.getAll(_date);
-        if(reminders == null){
-            reminders = new ArrayList<>();
-        }
-
-        _listItemAdapter = ReminderListAdapter.getInstance(getContext(), R.layout.fragment_reminder_list_item, reminders);
+        _listItemAdapter = ReminderListAdapter.getInstance(getContext(), R.layout.fragment_reminder_list_item);
+        reloadItems();
     }
 
     @Override
@@ -72,5 +68,14 @@ public class ReminderLister extends Fragment {
         }
 
         return view;
+    }
+
+    public void reloadItems() {
+        List<Reminder> reminders = _reminderService.getAll(_date);
+        if(reminders == null){
+            reminders = new ArrayList<>();
+        }
+
+        _listItemAdapter.addAll(reminders);
     }
 }

@@ -2,12 +2,14 @@ package de.hauke_stieler.rednimer.DayOverview.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,11 +26,10 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
         super(context, resource, objects);
     }
 
-    public static ReminderListAdapter getInstance(Context context, int resource, List<Reminder> objects) {
+    public static ReminderListAdapter getInstance(Context context, int resource) {
         Contract.RequireNotNull(context);
-        Contract.RequireNotNull(objects);
 
-        return new ReminderListAdapter(context, resource, objects);
+        return new ReminderListAdapter(context, resource, new ArrayList<>());
     }
 
     @Override

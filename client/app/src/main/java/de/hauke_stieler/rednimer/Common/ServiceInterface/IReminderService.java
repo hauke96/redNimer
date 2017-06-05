@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
+import juard.event.Event;
 
 /**
  * Created by hauke on 30.05.17.

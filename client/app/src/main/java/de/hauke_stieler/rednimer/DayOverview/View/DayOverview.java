@@ -23,6 +23,7 @@ import de.hauke_stieler.rednimer.ReminderCreator.View.ReminderCreatorActivity;
 public class DayOverview extends Fragment {
 
     private DateFormat _dateFormat;
+    private boolean _isResumed;
 
     public DayOverview() {
         _dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.GERMANY);
@@ -62,10 +63,25 @@ public class DayOverview extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        // directly after onStart, onResume is called. So when the activity starts, the resume-routine is actually not a resume-routine
+        _isResumed = false;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
-        //TODO reload reminder
+        // directly after onStart, onResume is called. So when the activity starts, the resume-routine is actually not a resume-routine
+        if (_isResumed) {
+            ViewPager viewPager = (ViewPager) getView().findViewById(R.id.dayOverviewViewPager);
+            DayOverviewPagerAdapter adapter = (DayOverviewPagerAdapter) viewPager.getAdapter();
+            adapter.getItem(viewPager.getCurrentItem()).reloadItems();
+        }
+
+        _isResumed = true;
     }
 
     private Date getSelectedDate(int position, DayOverviewPagerAdapter pagerAdapter) {
