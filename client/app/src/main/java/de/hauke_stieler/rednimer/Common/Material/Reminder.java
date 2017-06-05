@@ -10,15 +10,13 @@ import java.util.GregorianCalendar;
 public class Reminder {
     private String _title;
     private String _remindingDescription;
-    private Date _dueDate;
+    private Calendar _dueDate;
 
     public Reminder(Date dueDate) {
-        _dueDate = dueDate;
+        _dueDate = new GregorianCalendar();
+        _dueDate.setTime(dueDate);
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(dueDate);
-
-        _title = "A great reminder " + calendar.get(Calendar.DAY_OF_WEEK);
+        _title = "A great reminder " + _dueDate.get(Calendar.DAY_OF_WEEK);
         _remindingDescription = "18:00 - 23:00 every 3h " + (int)(Math.random()*100.0);
     }
 
@@ -27,7 +25,7 @@ public class Reminder {
     }
 
     public Date getDueDate() {
-        return (Date) _dueDate.clone();
+        return (Date) _dueDate.getTime().clone();
     }
 
     public String getRemindingDescription() {
