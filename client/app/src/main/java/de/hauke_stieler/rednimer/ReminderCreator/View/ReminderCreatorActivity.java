@@ -84,8 +84,8 @@ public class ReminderCreatorActivity extends AppCompatActivity {
             _selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
             setDateText(view, _selectedDate);
-        },
-                2017, 06, 05);
+        }, _selectedDate.get(Calendar.YEAR), _selectedDate.get(Calendar.MONTH), _selectedDate.get(Calendar.DAY_OF_MONTH));
+
         datePickerDialog.show();
     }
 
@@ -96,7 +96,8 @@ public class ReminderCreatorActivity extends AppCompatActivity {
             _selectedDate.set(Calendar.MINUTE, minute);
 
             setTimeText(view, _selectedDate);
-        }, 12, 0, true);
+        }, _selectedDate.get(Calendar.HOUR_OF_DAY), _selectedDate.get(Calendar.MINUTE), true);
+
         timePickerDialog.show();
     }
 
