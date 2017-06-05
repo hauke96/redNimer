@@ -25,6 +25,8 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     private static DateFormat _timeFormat = new SimpleDateFormat("HH:mm");
 
     private Calendar _selectedDate;
+    private String _title;
+    private String _description;
 
     private AbstractReminderService _reminderService;
 
@@ -109,7 +111,10 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void saveReminder() {
-        Reminder reminder = new Reminder(_selectedDate.getTime());
+        TextView titleTextView = (TextView) findViewById(R.id.creatorTitleEditText);
+        TextView descriptionTextView = (TextView) findViewById(R.id.creatorDescriptionEditText);
+
+        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate.getTime());
 
         _reminderService.add(reminder);
 

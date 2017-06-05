@@ -36,7 +36,7 @@ public class DummyReminderService extends AbstractReminderService {
             // generate some random amount of reminder
             int r = (int) (Math.random() * 6);
             for (int j = 0; j < r; j++) {
-                add(new Reminder(date));
+                add(new Reminder("A great reminder" + i, "Some useful description", date));
             }
 
             // go to next day
@@ -51,11 +51,11 @@ public class DummyReminderService extends AbstractReminderService {
 
         if (!keyAlreadyExists) {
             _reminderMap.put(date, new ArrayList<>());
+            ReminderAdded.fireEvent(new Reminder[]{reminder});
         }
 
         _reminderMap.get(date).add(reminder);
 
-        ReminderAdded.fireEvent(new Reminder[]{reminder});
     }
 
     @Override

@@ -2,7 +2,6 @@ package de.hauke_stieler.rednimer.DayOverview.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
@@ -49,7 +47,7 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
         titleTextView.setText(getItem(position).getTitle());
 
         TextView dueDateTextView = (TextView) view.findViewById(R.id.reminderDueDateTextView);
-        dueDateTextView.setText(getItem(position).getRemindingDescription());
+        dueDateTextView.setText(getItem(position).getDueDateDescription());
 
         return view;
     }

@@ -9,15 +9,15 @@ import java.util.GregorianCalendar;
  */
 public class Reminder {
     private String _title;
-    private String _remindingDescription;
+    private String _description;
     private Calendar _dueDate;
 
-    public Reminder(Date dueDate) {
+    public Reminder(String title, String description, Date dueDate) {
         _dueDate = new GregorianCalendar();
         _dueDate.setTime(dueDate);
 
-        _title = "A great reminder " + _dueDate.get(Calendar.DAY_OF_WEEK);
-        _remindingDescription = "18:00 - 23:00 every 3h " + (int)(Math.random()*100.0);
+        _title = title;
+        _description = description;
     }
 
     public String getTitle() {
@@ -28,7 +28,7 @@ public class Reminder {
         return (Date) _dueDate.getTime().clone();
     }
 
-    public String getRemindingDescription() {
-        return _remindingDescription;
+    public String getDueDateDescription() {
+        return _dueDate.toString();
     }
 }
