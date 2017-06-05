@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
@@ -24,7 +25,7 @@ public class DayOverview extends Fragment {
     private DateFormat _dateFormat;
 
     public DayOverview() {
-        _dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        _dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.GERMANY);
     }
 
     public static DayOverview newInstance() {

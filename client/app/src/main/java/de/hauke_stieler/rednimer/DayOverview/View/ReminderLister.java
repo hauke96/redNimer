@@ -18,6 +18,7 @@ import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
+import juard.contract.Contract;
 
 public class ReminderLister extends Fragment {
 
@@ -26,9 +27,13 @@ public class ReminderLister extends Fragment {
     private ArrayAdapter<Reminder> _listItemAdapter;
 
     public ReminderLister() {
+
     }
 
     public static ReminderLister newInstance(IReminderService reminderService, Date date) {
+        Contract.RequireNotNull(reminderService);
+        Contract.RequireNotNull(date);
+
         ReminderLister reminderLister = new ReminderLister();
 
         reminderLister._reminderService = reminderService;

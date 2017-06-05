@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lightGray"
-            android:orientation="vertical"
-            android:isScrollContainer="true">
+            android:orientation="vertical">
 
             <!--
             Name selection
@@ -70,14 +69,29 @@
                 android:background="@drawable/shadow" />
 
             <!--
-            Description
+            Due to
             -->
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Due to"
-                android:textColor="@color/mediumGray" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Due to"
+                    android:textColor="@color/mediumGray"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(tap to choose)"
+                    android:textColor="@color/mediumGray"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
