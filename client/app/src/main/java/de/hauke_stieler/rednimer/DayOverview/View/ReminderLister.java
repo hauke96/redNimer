@@ -10,30 +10,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
-import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
+import de.hauke_stieler.rednimer.R;
 import juard.contract.Contract;
 
 public class ReminderLister extends Fragment {
 
     private AbstractReminderService _reminderService;
-    private Date _date;
+    private Calendar _date;
     private ArrayAdapter<Reminder> _listItemAdapter;
 
     public ReminderLister() {
 
     }
 
-    public static ReminderLister newInstance(AbstractReminderService reminderService, Date date) {
+    public static ReminderLister newInstance(AbstractReminderService reminderService, Calendar date) {
         Contract.RequireNotNull(reminderService);
         Contract.RequireNotNull(date);
 
@@ -45,8 +43,8 @@ public class ReminderLister extends Fragment {
         return reminderLister;
     }
 
-    public Date getDate() {
-        return (Date) _date.clone();
+    public Calendar getDate() {
+        return (Calendar) _date.clone();
     }
 
     @Override
@@ -79,14 +77,11 @@ public class ReminderLister extends Fragment {
     private void reloadItems(Object... items) {
         boolean containsRelevantItem = false;
 
-        Calendar date = GregorianCalendar.getInstance();
-        date.setTime(_date);
-
         for (Object item : items) {
             Calendar itemDate = GregorianCalendar.getInstance();
             itemDate.setTime(((Reminder) item).getDueDate());
 
-            containsRelevantItem |= date.get(Calendar.DAY_OF_YEAR) == itemDate.get(Calendar.DAY_OF_YEAR) && date.get(Calendar.YEAR) == itemDate.get(Calendar.YEAR);
+            containsRelevantItem |= _date.get(Calendar.DAY_OF_YEAR) == itemDate.get(Calendar.DAY_OF_YEAR) && _date.get(Calendar.YEAR) == itemDate.get(Calendar.YEAR);
         }
 
         /*

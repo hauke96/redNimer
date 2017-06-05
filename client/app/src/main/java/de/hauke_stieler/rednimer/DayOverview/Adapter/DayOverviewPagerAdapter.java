@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -39,9 +38,8 @@ public class DayOverviewPagerAdapter extends FragmentPagerAdapter {
         // Page 0 is the current date (=today).
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, offset);
-        Date date = calendar.getTime();
 
-        ReminderLister reminderLister = ReminderLister.newInstance(Locator.get(AbstractReminderService.class), date);
+        ReminderLister reminderLister = ReminderLister.newInstance(Locator.get(AbstractReminderService.class), calendar);
 
         return reminderLister;
     }

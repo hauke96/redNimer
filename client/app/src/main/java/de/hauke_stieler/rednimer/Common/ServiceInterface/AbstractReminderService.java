@@ -1,6 +1,6 @@
 package de.hauke_stieler.rednimer.Common.ServiceInterface;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
@@ -14,5 +14,5 @@ public abstract class AbstractReminderService {
 
     public abstract void add(Reminder reminder);
 
-    public abstract List<Reminder> getAll(Date date);
+    public abstract List<Reminder> getAll(Calendar date);
 }
