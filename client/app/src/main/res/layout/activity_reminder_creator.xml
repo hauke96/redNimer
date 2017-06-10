@@ -59,14 +59,7 @@
 
             </LinearLayout>
 
-            <!--
-            Separator
-            -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shadow" />
+            <include layout="@layout/separator_shadow"/>
 
             <!--
             Due to
@@ -233,14 +226,7 @@
 
             </LinearLayout>
 
-            <!--
-            Separator
-            -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shadow" />
+            <include layout="@layout/separator_shadow"/>
 
             <!--
             Notifications
@@ -292,13 +278,7 @@
 
                 </RelativeLayout>
 
-                <!--
-                Separator line
-                -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryVeryLight" />
+                <include layout="@layout/separator_line" />
 
                 <!--
                 Frequency
@@ -382,31 +362,21 @@
 
             </LinearLayout>
 
-            <!--
-            Separator
-            -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shadow" />
+            <include layout="@layout/separator_shadow"/>
 
         </LinearLayout>
 
     </ScrollView>
 
+    <!--
+    Save
+    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--
-        Separator line
-        -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimaryMedium" />
+        <include layout="@layout/separator_line" />
 
         <Button
             android:id="@+id/creatorSaveButton"
