@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.DayOverview.Service;
+package de.hauke_stieler.rednimer.Technical.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,6 +11,8 @@ import java.util.Map;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
+import juard.contract.Contract;
 
 /**
  * Created by hauke on 30.05.17.
@@ -19,8 +21,13 @@ public class DummyReminderService extends AbstractReminderService {
 
     private Map<String, List<Reminder>> _reminderMap;
     private DateFormat _dateFormatter;
+    private INotificationService _notificationService;
 
-    public DummyReminderService() {
+    public DummyReminderService(INotificationService notificationService) {
+        Contract.NotNull(notificationService);
+
+        _notificationService = notificationService;
+
         _reminderMap = new HashMap<>();
         _dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -28,7 +35,7 @@ public class DummyReminderService extends AbstractReminderService {
 
         calendar.set(Calendar.HOUR_OF_DAY, 18);
         calendar.set(Calendar.MINUTE, 00);
-        add(new Reminder("Einkaufen", "* Nudeln\n*Wasser\n*Bier", calendar));
+        add(new Reminder("Einkaufen", "* Nudeln\n* Wasser\n* Bier", calendar));
 
         calendar.set(Calendar.HOUR_OF_DAY, 19);
         calendar.set(Calendar.MINUTE, 30);

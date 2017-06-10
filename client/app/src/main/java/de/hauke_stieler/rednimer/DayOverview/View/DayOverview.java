@@ -7,22 +7,38 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Calendar;
 
+import de.hauke_stieler.rednimer.Common.Material.Reminder;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.ReminderCreator.View.ReminderCreatorActivity;
+import juard.contract.Contract;
+import juard.injection.Locator;
 
 public class DayOverview extends Fragment {
 
     private boolean _isResumed;
 
     public DayOverview() {
+        AbstractReminderService reminderService = Locator.get(AbstractReminderService.class);
+        INotificationService notificationService = Locator.get(INotificationService.class);
+
+        reminderService.ReminderAdded.add(objects -> {
+            Contract.NotNull(objects);
+            Contract.Satisfy(objects.length > 0);
+            Contract.Satisfy(objects[0] instanceof Reminder);
+
+            notificationService.addReminder((Reminder) objects[0], getContext());
+        });
     }
 
     public static DayOverview newInstance() {
