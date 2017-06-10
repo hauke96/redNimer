@@ -26,11 +26,12 @@ import juard.injection.Locator;
 
 public class DayOverview extends Fragment {
 
+    private final INotificationService notificationService;
     private boolean _isResumed;
 
     public DayOverview() {
         AbstractReminderService reminderService = Locator.get(AbstractReminderService.class);
-        INotificationService notificationService = Locator.get(INotificationService.class);
+        notificationService = Locator.get(INotificationService.class);
 
         reminderService.ReminderAdded.add(objects -> {
             Contract.NotNull(objects);
@@ -49,6 +50,8 @@ public class DayOverview extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        notificationService.vibrate(getContext());
     }
 
     @Override

@@ -17,6 +17,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import de.hauke_stieler.rednimer.Common.DomainValue.TimeUnit;
+import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
+import de.hauke_stieler.rednimer.Common.Material.OneTimeNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.R;
@@ -130,21 +133,23 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         TextView titleTextView = (TextView) findViewById(R.id.creatorTitleEditText);
         TextView descriptionTextView = (TextView) findViewById(R.id.creatorDescriptionEditText);
 
-        SwitchCompat notificationSwitch = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
-        boolean oneNotification = notificationSwitch.isChecked();
-        if (oneNotification) {
-            //TODO create notification object (from "NotificationSpecification"(?) class) here which contains all relevant information to determine when and how often to show notifications.
+        INotificationSpecification notificationSpecification = null;
+
+        // When checked, multiple notifications have been chosen
+        boolean oneTimeNotification = !((SwitchCompat) findViewById(R.id.creatorNotificationSwitch)).isChecked();
+
+        if (oneTimeNotification) {
+            int timeBeforeDueDate = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
+            String timeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
+
+            notificationSpecification = new OneTimeNotificationSpecification(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
         } else {
             Log.e("Create Reminder", "Multiple notifications not implemented yet!");
         }
 
-        int oneNotificationNumber = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
-        String frequency = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
-
-        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate, oneNotification, oneNotificationNumber, frequency);
+        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate, notificationSpecification);
 
         _reminderService.add(reminder);
-
 
         onBackPressed();
     }

@@ -4,15 +4,19 @@ package de.hauke_stieler.rednimer.Technical.DummyServices;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
+import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.R;
 import juard.contract.Contract;
 
@@ -22,6 +26,7 @@ import juard.contract.Contract;
 
 public class DummyNotificationService implements INotificationService {
 
+    public static final int VIBRATION_DURATION = 150;
     private Map<Reminder, Timer> _reminderMap;
 
     private static int _notificationID = 0;
@@ -44,19 +49,35 @@ public class DummyNotificationService implements INotificationService {
     }
 
     private Timer createTimer(Reminder reminder, Context context) {
-        Timer result = new Timer();
+        INotificationSpecification specification = reminder.getNotificationSpecification();
 
-        result.scheduleAtFixedRate(new TimerTask() {
+        Log.i("start", "createTimer: "+ DateTimeFormatter.formatTime(specification.getStartingPoint()));
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                raiseNotifiation(reminder.getTitle(), context);
-            }
-        }, reminder.getDueDate().getTime(), 10000 /* TODO add real frequency */);
+                raiseNotification(reminder.getTitle(), context);
 
-        return result;
+                if (specification.isOneTimeNotification()) {
+                    this.cancel();
+                    timer.cancel();
+                    timer.purge();
+                    return;
+                }
+
+            }
+        }, specification.getStartingPoint().getTime(), specification.getFrequencyInMillis());
+
+        return timer;
     }
 
-    private void raiseNotifiation(String title, Context context) {
+    private void raiseNotification(String title, Context context) {
+        showPopupNotification(title, context);
+        vibrate(context);
+    }
+
+    private void showPopupNotification(String title, Context context) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 
@@ -70,5 +91,12 @@ public class DummyNotificationService implements INotificationService {
         int notificationID = getNotificationID();
 
         notificationManager.notify(notificationID, notification);
+    }
+
+    public void vibrate(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        if(vibrator.hasVibrator()){
+            vibrator.vibrate(new long[]{0, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION, VIBRATION_DURATION}, -1);
+        }
     }
 }

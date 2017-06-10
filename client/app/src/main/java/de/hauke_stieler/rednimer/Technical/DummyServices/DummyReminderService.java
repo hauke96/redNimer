@@ -1,5 +1,7 @@
 package de.hauke_stieler.rednimer.Technical.DummyServices;
 
+import android.content.Context;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

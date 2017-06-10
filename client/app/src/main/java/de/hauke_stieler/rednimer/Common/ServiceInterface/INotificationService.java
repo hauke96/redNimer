@@ -10,4 +10,6 @@ import de.hauke_stieler.rednimer.Common.Material.Reminder;
 
 public interface INotificationService {
     void addReminder(Reminder reminder, Context context);
+
+    void vibrate(Context context);
 }
