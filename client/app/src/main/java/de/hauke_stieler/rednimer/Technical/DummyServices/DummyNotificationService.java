@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.Technical.Service;
+package de.hauke_stieler.rednimer.Technical.DummyServices;
 
 
 import android.app.Notification;

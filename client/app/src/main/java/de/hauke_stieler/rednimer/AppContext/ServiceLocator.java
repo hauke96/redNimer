@@ -1,11 +1,9 @@
 package de.hauke_stieler.rednimer.AppContext;
 
-import android.content.Context;
-
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
-import de.hauke_stieler.rednimer.Technical.Service.DummyNotificationService;
-import de.hauke_stieler.rednimer.Technical.Service.DummyReminderService;
+import de.hauke_stieler.rednimer.Technical.DummyServices.DummyNotificationService;
+import de.hauke_stieler.rednimer.Technical.DummyServices.DummyReminderService;
 import juard.injection.Locator;
 
 /**
