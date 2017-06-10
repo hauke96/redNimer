@@ -49,10 +49,10 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         toggleDueDateLayoutVisibility(false);
         toggleNotificationLayoutVisibility(false);
 
-        Contract.EnsureNotNull(_dateFormat);
-        Contract.EnsureNotNull(_timeFormat);
-        Contract.EnsureNotNull(_selectedDate);
-        Contract.EnsureNotNull(_reminderService);
+        Contract.NotNull(_dateFormat);
+        Contract.NotNull(_timeFormat);
+        Contract.NotNull(_selectedDate);
+        Contract.NotNull(_reminderService);
     }
 
     private void registerListener() {

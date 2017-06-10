@@ -32,14 +32,15 @@ public class ReminderLister extends Fragment {
     }
 
     public static ReminderLister newInstance(AbstractReminderService reminderService, Calendar date) {
-        Contract.RequireNotNull(reminderService);
-        Contract.RequireNotNull(date);
+        Contract.NotNull(reminderService);
+        Contract.NotNull(date);
 
         ReminderLister reminderLister = new ReminderLister();
 
         reminderLister._reminderService = reminderService;
         reminderLister._date = date;
 
+        Contract.NotNull(reminderLister);
         return reminderLister;
     }
 

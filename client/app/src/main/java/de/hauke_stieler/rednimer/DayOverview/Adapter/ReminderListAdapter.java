@@ -25,7 +25,7 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
     }
 
     public static ReminderListAdapter getInstance(Context context, int resource) {
-        Contract.RequireNotNull(context);
+        Contract.NotNull(context);
 
         return new ReminderListAdapter(context, resource, new ArrayList<>());
     }
