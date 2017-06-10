@@ -10,13 +10,22 @@ import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 public class Reminder {
     private final String _title;
     private final String _description;
+    private boolean _oneNotification;
+    private int _notificationMillisBeforeDueDate;
     private final Calendar _dueDate;
 
-    public Reminder(String title, String description, Calendar dueDate) {
-        _dueDate = (Calendar) dueDate.clone();
+    public Reminder(String title, String description, Calendar dueDate){
+        this(title, description, dueDate, true, 1, "Minute");
+    }
+
+    public Reminder(String title, String description, Calendar dueDate, boolean oneNotification, int oneNotificationNumber, String oneNotificationUnit) {
+        //TODO contracts
 
         _title = title;
+        _dueDate = (Calendar) dueDate.clone();
         _description = description;
+        _oneNotification = oneNotification;
+        _notificationMillisBeforeDueDate = oneNotificationNumber;
     }
 
     public String getTitle() {

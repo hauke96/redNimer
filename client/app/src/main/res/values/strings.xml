@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">redNimer</string>
+
+    <string-array name="frequencies">
+        <item>Minute</item>
+        <item>Hour</item>
+        <item>Day</item>
+        <item>Week</item>
+    </string-array>
 </resources>

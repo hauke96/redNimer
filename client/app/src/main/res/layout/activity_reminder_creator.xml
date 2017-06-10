@@ -59,7 +59,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/separator_shadow"/>
+            <include layout="@layout/separator_shadow" />
 
             <!--
             Due to
@@ -94,7 +94,7 @@
                 android:padding="10dp">
 
                 <!--
-                Choose between one and multiple due dates
+                Switch to choose between one and multiple due dates
                 -->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -199,6 +199,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:enabled="false"
                         android:text="Repeat every"
                         android:textSize="@dimen/text_font_size" />
 
@@ -210,6 +211,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginRight="5dp"
                         android:ems="10"
+                        android:enabled="false"
                         android:inputType="number"
                         android:text="1" />
 
@@ -220,13 +222,14 @@
                         android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:layout_alignBottom="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
+                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:enabled="false" />
 
                 </RelativeLayout>
 
             </LinearLayout>
 
-            <include layout="@layout/separator_shadow"/>
+            <include layout="@layout/separator_shadow" />
 
             <!--
             Notifications
@@ -245,6 +248,9 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
+                <!--
+                Switch to choose between one and multiple notifications
+                -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -281,47 +287,7 @@
                 <include layout="@layout/separator_line" />
 
                 <!--
-                Frequency
-                -->
-                <RelativeLayout
-                    android:id="@+id/creatorFrequencyLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/defaultBackground"
-                    android:padding="10dp"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:id="@+id/creatorFrequencyTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorFrequencyNumberEditText"
-                        android:layout_marginRight="5dp"
-                        android:text="Every"
-                        android:textSize="@dimen/text_font_size" />
-
-                    <EditText
-                        android:id="@+id/creatorFrequencyNumberEditText"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorFrequencyTextView"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:text="1" />
-
-                    <Spinner
-                        android:id="@+id/creatorFrequencyUnitSpinner"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorFrequencyNumberEditText"
-                        android:layout_toEndOf="@+id/creatorFrequencyNumberEditText" />
-
-                </RelativeLayout>
-
-                <!--
-                Before
+                One Notification
                 -->
                 <RelativeLayout
                     android:id="@+id/creatorBeforeLayout"
@@ -332,7 +298,7 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:id="@+id/creatorBeforeNumberEditText"
+                        android:id="@+id/creatorOneNotificationNumberEditText"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
@@ -341,28 +307,72 @@
                         android:text="1" />
 
                     <Spinner
-                        android:id="@+id/creatorBeforeUnitSpinner"
+                        android:id="@+id/creatorOneNotificationUnitSpinner"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorBeforeNumberEditText"
+                        android:layout_alignBaseline="@+id/creatorOneNotificationNumberEditText"
                         android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorBeforeNumberEditText" />
+                        android:layout_toEndOf="@+id/creatorOneNotificationNumberEditText"
+                        android:entries="@array/frequencies" />
 
                     <TextView
-                        android:id="@+id/creatorBeforeTextView"
+                        android:id="@+id/creatorOneNotificationTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorBeforeNumberEditText"
+                        android:layout_alignBaseline="@+id/creatorOneNotificationNumberEditText"
                         android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorBeforeUnitSpinner"
+                        android:layout_toEndOf="@+id/creatorOneNotificationUnitSpinner"
                         android:text="before due date"
                         android:textSize="@dimen/text_font_size" />
 
                 </RelativeLayout>
 
+                <!--
+                Multiple notifications
+                -->
+                <RelativeLayout
+                    android:id="@+id/creatorFrequencyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/defaultBackground"
+                    android:padding="10dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/creatorMultipleNotificationsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:layout_marginRight="5dp"
+                        android:enabled="false"
+                        android:text="Every"
+                        android:textSize="@dimen/text_font_size" />
+
+                    <EditText
+                        android:id="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_toEndOf="@+id/creatorMultipleNotificationsTextView"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:inputType="number"
+                        android:text="1" />
+
+                    <Spinner
+                        android:id="@+id/creatorMultipleNotificationsUnitSpinner"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:layout_toEndOf="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:enabled="false" />
+
+                </RelativeLayout>
+
             </LinearLayout>
 
-            <include layout="@layout/separator_shadow"/>
+            <include layout="@layout/separator_shadow" />
 
         </LinearLayout>
 

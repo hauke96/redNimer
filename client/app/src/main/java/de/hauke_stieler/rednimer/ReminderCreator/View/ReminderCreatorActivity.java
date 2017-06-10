@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -127,9 +130,21 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         TextView titleTextView = (TextView) findViewById(R.id.creatorTitleEditText);
         TextView descriptionTextView = (TextView) findViewById(R.id.creatorDescriptionEditText);
 
-        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate);
+        SwitchCompat notificationSwitch = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
+        boolean oneNotification = notificationSwitch.isChecked();
+        if (oneNotification) {
+            //TODO create notification object (from "NotificationSpecification"(?) class) here which contains all relevant information to determine when and how often to show notifications.
+        } else {
+            Log.e("Create Reminder", "Multiple notifications not implemented yet!");
+        }
+
+        int oneNotificationNumber = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
+        String frequency = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
+
+        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate, oneNotification, oneNotificationNumber, frequency);
 
         _reminderService.add(reminder);
+
 
         onBackPressed();
     }
