@@ -93,56 +93,145 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/defaultBackground"
+                android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/creatorChooseDateTextView"
-                    android:layout_width="wrap_content"
+                <!--
+                Choose between one and multiple due dates
+                -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/creatorAtTextView"
-                    android:layout_toStartOf="@+id/creatorAtTextView"
-                    android:height="40dp"
-                    android:background="@color/colorPrimaryVeryLight"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="(choose date)"
-                    android:textSize="@dimen/text_font_size"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="10dp">
 
-                <TextView
-                    android:id="@+id/creatorAtTextView"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorDueDateSwitch"
+                        android:layout_toStartOf="@+id/creatorDueDateSwitch"
+                        android:text="One date"
+                        android:textSize="@dimen/text_font_size" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/creatorDueDateSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:theme="@style/SwitchStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorDueDateSwitch"
+                        android:layout_toEndOf="@+id/creatorDueDateSwitch"
+                        android:text="Multiple dates"
+                        android:textSize="@dimen/text_font_size" />
+
+                </RelativeLayout>
+
+                <!--
+                One due date layout
+                -->
+                <RelativeLayout
+                    android:id="@+id/creatorOneDueDateLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:height="40dp"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="at"
-                    android:textSize="@dimen/text_font_size" />
+                    android:background="@color/defaultBackground"
+                    android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/creatorChooseTimeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/creatorAtTextView"
-                    android:layout_toEndOf="@+id/creatorAtTextView"
-                    android:height="40dp"
-                    android:background="@color/colorPrimaryVeryLight"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="(choose time)"
-                    android:textSize="@dimen/text_font_size"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/creatorChooseDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorAtTextView"
+                        android:layout_toStartOf="@+id/creatorAtTextView"
+                        android:height="40dp"
+                        android:background="@color/colorPrimaryVeryLight"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="(choose date)"
+                        android:textSize="@dimen/text_font_size"
+                        android:textStyle="bold" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/creatorAtTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:height="40dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="at"
+                        android:textSize="@dimen/text_font_size" />
+
+                    <TextView
+                        android:id="@+id/creatorChooseTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorAtTextView"
+                        android:layout_toEndOf="@+id/creatorAtTextView"
+                        android:height="40dp"
+                        android:background="@color/colorPrimaryVeryLight"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="(choose time)"
+                        android:textSize="@dimen/text_font_size"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <!--
+                Multiple due dates layout
+                -->
+                <RelativeLayout
+                    android:id="@+id/creatorMultipleDueDatesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/creatorMultipleDueDatesTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:text="Repeat every"
+                        android:textSize="@dimen/text_font_size" />
+
+                    <EditText
+                        android:id="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginRight="5dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:text="1" />
+
+                    <Spinner
+                        android:id="@+id/creatorMultipleDueDatesUnitSpinner"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_alignBottom="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_marginRight="5dp"
+                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <!--
             Separator

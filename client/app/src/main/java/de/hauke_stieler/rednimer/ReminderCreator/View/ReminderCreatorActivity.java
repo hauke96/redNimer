@@ -46,6 +46,7 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         setDateText((TextView) findViewById(R.id.creatorChooseDateTextView), _selectedDate);
         setTimeText((TextView) findViewById(R.id.creatorChooseTimeTextView), _selectedDate);
 
+        toggleDueDateLayoutVisibility(false);
         toggleNotificationLayoutVisibility(false);
 
         Contract.EnsureNotNull(_dateFormat);
@@ -55,8 +56,13 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void registerListener() {
-        SwitchCompat switchControl = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
-        switchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        SwitchCompat dueDateSwitchControl = (SwitchCompat) findViewById(R.id.creatorDueDateSwitch);
+        dueDateSwitchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            toggleDueDateLayoutVisibility(isChecked);
+        });
+
+        SwitchCompat notificationSwitchControl = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
+        notificationSwitchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
             toggleNotificationLayoutVisibility(isChecked);
         });
 
@@ -66,8 +72,16 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         findViewById(R.id.creatorSaveButton).setOnClickListener(v -> saveReminder());
     }
 
-    private void toggleNotificationLayoutVisibility(boolean beforeLayoutChosen) {
-        if (beforeLayoutChosen) {
+    private void toggleDueDateLayoutVisibility(boolean multipleDueDatesLayoutChosen) {
+        if (multipleDueDatesLayoutChosen) {
+            findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.GONE);
+        }
+    }
+
+    private void toggleNotificationLayoutVisibility(boolean multipleNotificationsLayoutChosen) {
+        if (multipleNotificationsLayoutChosen) {
             findViewById(R.id.creatorFrequencyLayout).setVisibility(View.VISIBLE);
             findViewById(R.id.creatorBeforeLayout).setVisibility(View.GONE);
         } else {
