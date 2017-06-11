@@ -33,4 +33,9 @@ public class MultipleTimesNotificationSpecification implements INotificationSpec
     public boolean hasBeenRaised() {
         return _hasBeenRaised;
     }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

@@ -59,11 +59,9 @@ public class DummyNotificationService implements INotificationService {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                //TODO pass a notification specification which contains all information
                 raiseNotification(reminder.getTitle(), context);
 
-                //TODO create a isFinished() method in the spcification, which then implements this in a one-time and multiple-time way
-                if (specification.isOneTimeNotification() && specification.hasBeenRaised()) {
+                if (specification.isFinished()){
                     this.cancel();
                     timer.cancel();
                     timer.purge();

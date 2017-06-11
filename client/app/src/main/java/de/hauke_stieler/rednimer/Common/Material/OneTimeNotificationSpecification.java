@@ -60,4 +60,9 @@ public class OneTimeNotificationSpecification implements INotificationSpecificat
     public boolean hasBeenRaised() {
         return _hasBeenRaised;
     }
+
+    @Override
+    public boolean isFinished() {
+        return isOneTimeNotification() && hasBeenRaised();
+    }
 }
