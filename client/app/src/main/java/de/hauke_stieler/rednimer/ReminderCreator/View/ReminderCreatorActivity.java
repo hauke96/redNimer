@@ -47,7 +47,6 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         registerListener();
 
         _selectedDate = GregorianCalendar.getInstance();
-        _selectedDate.add(Calendar.DATE, 1);
 
         setDateText((TextView) findViewById(R.id.creatorChooseDateTextView), _selectedDate);
         setTimeText((TextView) findViewById(R.id.creatorChooseTimeTextView), _selectedDate);
