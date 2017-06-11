@@ -7,6 +7,8 @@ import java.util.Calendar;
  */
 
 public class MultipleTimesNotificationSpecification implements INotificationSpecification {
+    private boolean _hasBeenRaised;
+
     @Override
     public Calendar getStartingPoint() {
         return null;
@@ -20,5 +22,15 @@ public class MultipleTimesNotificationSpecification implements INotificationSpec
     @Override
     public boolean isOneTimeNotification() {
         return false;
+    }
+
+    @Override
+    public void setIsRaised() {
+        _hasBeenRaised = true;
+    }
+
+    @Override
+    public boolean hasBeenRaised() {
+        return _hasBeenRaised;
     }
 }

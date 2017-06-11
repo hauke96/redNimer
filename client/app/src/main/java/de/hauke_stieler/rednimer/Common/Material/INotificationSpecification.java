@@ -12,4 +12,8 @@ public interface INotificationSpecification {
     int getFrequencyInMillis();
 
     boolean isOneTimeNotification();
+
+    void setIsRaised();
+
+    boolean hasBeenRaised();
 }

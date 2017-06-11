@@ -14,6 +14,7 @@ public class OneTimeNotificationSpecification implements INotificationSpecificat
     private final Calendar _dueDate;
     private final Calendar _startingDate;
     private final int _timeBeforeDueDate;
+    private boolean _hasBeenRaised;
 
     /**
      * @param timeBeforeDueDate Amount of time before due date (e.g. in Weeks)
@@ -48,5 +49,15 @@ public class OneTimeNotificationSpecification implements INotificationSpecificat
     @Override
     public boolean isOneTimeNotification() {
         return true;
+    }
+
+    @Override
+    public void setIsRaised() {
+        _hasBeenRaised = true;
+    }
+
+    @Override
+    public boolean hasBeenRaised() {
+        return _hasBeenRaised;
     }
 }

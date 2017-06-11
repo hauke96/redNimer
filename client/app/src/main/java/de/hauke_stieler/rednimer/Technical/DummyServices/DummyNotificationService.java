@@ -8,6 +8,8 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -57,14 +59,18 @@ public class DummyNotificationService implements INotificationService {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                //TODO pass a notification specification which contains all information
                 raiseNotification(reminder.getTitle(), context);
 
-                if (specification.isOneTimeNotification()) {
+                //TODO create a isFinished() method in the spcification, which then implements this in a one-time and multiple-time way
+                if (specification.isOneTimeNotification() && specification.hasBeenRaised()) {
                     this.cancel();
                     timer.cancel();
                     timer.purge();
                     return;
                 }
+
+                specification.setIsRaised();
 
             }
         }, specification.getStartingPoint().getTime(), specification.getFrequencyInMillis());
