@@ -22,14 +22,12 @@ import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.OneTimeNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.R;
 import juard.contract.Contract;
 import juard.injection.Locator;
 
 public class ReminderCreatorActivity extends AppCompatActivity {
-    private static DateFormat _dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static DateFormat _timeFormat = new SimpleDateFormat("HH:mm");
-
     private Calendar _selectedDate;
 
     private AbstractReminderService _reminderService;
@@ -54,8 +52,6 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         toggleDueDateLayoutVisibility(false);
         toggleNotificationLayoutVisibility(false);
 
-        Contract.NotNull(_dateFormat);
-        Contract.NotNull(_timeFormat);
         Contract.NotNull(_selectedDate);
         Contract.NotNull(_reminderService);
     }
@@ -121,11 +117,11 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void setDateText(TextView view, Calendar date) {
-        view.setText(_dateFormat.format(date.getTime()));
+        view.setText(DateTimeFormatter.formatDate(date));
     }
 
     private void setTimeText(TextView view, Calendar date) {
-        view.setText(_timeFormat.format(date.getTime()));
+        view.setText(DateTimeFormatter.formatDate(date));
     }
 
     private void saveReminder() {
