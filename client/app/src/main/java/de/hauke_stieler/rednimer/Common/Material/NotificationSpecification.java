@@ -16,15 +16,16 @@ public class NotificationSpecification {
     private final int _repetitionTimeInMillis;
     private int _amountOfNotifications;
 
-    public NotificationSpecification(Calendar startDate, int repetitionTimeInMillis, int amountOfNotifications){
+    public NotificationSpecification(Calendar startDate, int repetitionTimeInMillis, int amountOfNotifications) {
         Contract.NotNull(startDate);
-        Contract.Satisfy(repetitionTimeInMillis>0);
-        Contract.Satisfy(amountOfNotifications>=1); // This one will be the notification at the due date
+        Contract.Satisfy(repetitionTimeInMillis > 0);
+        Contract.Satisfy(amountOfNotifications >= 1); // This one will be the notification at the due date
 
         _startDate = startDate;
         _repetitionTimeInMillis = repetitionTimeInMillis;
         _amountOfNotifications = amountOfNotifications;
     }
+
     public Calendar getStartingPoint() {
         return _startDate;
     }

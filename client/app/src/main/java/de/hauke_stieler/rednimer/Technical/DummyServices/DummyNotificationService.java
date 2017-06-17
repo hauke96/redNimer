@@ -67,8 +67,8 @@ public class DummyNotificationService implements INotificationService {
 
                         raiseNotification(reminder.getTitle() + " actual", context);
 
-                        timer.cancel();
                         this.cancel();
+                        timer.cancel();
                         timer.purge();
                     } catch (InterruptedException e) {
                         e.printStackTrace();

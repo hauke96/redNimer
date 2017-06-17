@@ -20,7 +20,7 @@ public class OneTimeNotificationSpecification extends NotificationSpecification 
         Contract.NotNull(timeUnit);
 
         timeBeforeDueDate = timeBeforeDueDate * timeUnit.Milliseconds;
-        int amountOfNotifications = 2; // One notification before due date and one at due date
+        int amountOfNotifications = 1;
 
         Calendar startingDate = (Calendar) dueDate.clone();
         startingDate.add(Calendar.MILLISECOND, -timeBeforeDueDate);

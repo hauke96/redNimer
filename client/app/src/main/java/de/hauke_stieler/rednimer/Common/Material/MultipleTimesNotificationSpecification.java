@@ -21,7 +21,7 @@ public class MultipleTimesNotificationSpecification extends NotificationSpecific
         Contract.Satisfy(repetitionTime > 0);
         Contract.NotNull(repetitionTimeUnit);
 
-        int amountOfNotifications = timeBeforeDueDate / repetitionTime + 1; // One notification before due date and one at due date
+        int amountOfNotifications = timeBeforeDueDate / repetitionTime + 1; // +1 for one additional notification at startDate
         int repetitionTimeInMillis = repetitionTime * repetitionTimeUnit.Milliseconds;
 
         Calendar startingDate = (Calendar) dueDate.clone();
