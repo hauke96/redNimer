@@ -196,12 +196,12 @@
                         android:id="@+id/creatorMultipleDueDatesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/creatorMultipleDueDatesUnitSpinner"
                         android:layout_marginRight="5dp"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:enabled="false"
                         android:text="Repeat every"
-                        android:textSize="@dimen/text_font_size"
-                        android:layout_alignBottom="@+id/creatorMultipleDueDatesUnitSpinner"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
+                        android:textSize="@dimen/text_font_size" />
 
                     <EditText
                         android:id="@+id/creatorMultipleDueDatesFrequencyEditText"
@@ -229,19 +229,19 @@
                         android:id="@+id/creatorMultipleDueDatesEndsAtTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
                         android:layout_marginRight="5dp"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner"
                         android:enabled="false"
                         android:text="Ends at: "
-                        android:textSize="@dimen/text_font_size"
-                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner" />
+                        android:textSize="@dimen/text_font_size" />
 
                     <Spinner
                         android:id="@+id/creatorMultipleDueDatesEndSpinner"
                         android:layout_width="150dp"
-                        android:layout_marginTop="10dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_marginTop="10dp"
                         android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
 
                 </RelativeLayout>
@@ -314,13 +314,16 @@
                     android:layout_height="wrap_content"
                     android:background="@color/defaultBackground"
                     android:padding="10dp"
+                    android:gravity="center"
                     android:visibility="visible">
 
                     <EditText
                         android:id="@+id/creatorOneNotificationNumberEditText"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/creatorOneNotificationUnitSpinner"
                         android:layout_marginRight="5dp"
+                        android:layout_toStartOf="@+id/creatorOneNotificationUnitSpinner"
                         android:ems="10"
                         android:inputType="number"
                         android:text="1" />
@@ -329,9 +332,7 @@
                         android:id="@+id/creatorOneNotificationUnitSpinner"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorOneNotificationNumberEditText"
                         android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorOneNotificationNumberEditText"
                         android:entries="@array/frequencies" />
 
                     <TextView
@@ -355,13 +356,15 @@
                     android:layout_height="wrap_content"
                     android:background="@color/defaultBackground"
                     android:padding="10dp"
+                    android:gravity="center"
                     android:visibility="visible">
 
                     <TextView
                         android:id="@+id/creatorMultipleNotificationsTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:layout_toStartOf="@+id/creatorMultipleNotificationsNumberEditText"
+                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsUnitSpinner"
                         android:layout_marginRight="5dp"
                         android:enabled="false"
                         android:text="Every"
@@ -371,21 +374,21 @@
                         android:id="@+id/creatorMultipleNotificationsNumberEditText"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
                         android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorMultipleNotificationsTextView"
                         android:ems="10"
                         android:enabled="false"
                         android:inputType="number"
-                        android:text="1" />
+                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsUnitSpinner"
+                        android:text="1"
+                        android:layout_alignParentTop="true"
+                        android:layout_toStartOf="@+id/creatorMultipleNotificationsUnitSpinner"/>
 
                     <Spinner
                         android:id="@+id/creatorMultipleNotificationsUnitSpinner"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorMultipleNotificationsNumberEditText"
-                        android:layout_toEndOf="@+id/creatorMultipleNotificationsNumberEditText"
-                        android:enabled="false" />
+                        android:enabled="false"
+                        android:entries="@array/frequencies" />
 
                 </RelativeLayout>
 
