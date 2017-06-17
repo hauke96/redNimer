@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -121,7 +119,7 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void setTimeText(TextView view, Calendar date) {
-        view.setText(DateTimeFormatter.formatDate(date));
+        view.setText(DateTimeFormatter.formatTime(date));
     }
 
     private void saveReminder() {
