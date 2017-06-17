@@ -81,11 +81,11 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
     private void toggleNotificationLayoutVisibility(boolean multipleNotificationsLayoutChosen) {
         if (multipleNotificationsLayoutChosen) {
-            findViewById(R.id.creatorFrequencyLayout).setVisibility(View.VISIBLE);
-            findViewById(R.id.creatorBeforeLayout).setVisibility(View.GONE);
+            findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.creatorOneNotificationLayout).setVisibility(View.GONE);
         } else {
-            findViewById(R.id.creatorFrequencyLayout).setVisibility(View.GONE);
-            findViewById(R.id.creatorBeforeLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.GONE);
+            findViewById(R.id.creatorOneNotificationLayout).setVisibility(View.VISIBLE);
         }
     }
 

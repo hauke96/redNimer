@@ -309,7 +309,7 @@
                 One Notification
                 -->
                 <RelativeLayout
-                    android:id="@+id/creatorBeforeLayout"
+                    android:id="@+id/creatorOneNotificationLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/defaultBackground"
@@ -351,7 +351,7 @@
                 Multiple notifications
                 -->
                 <RelativeLayout
-                    android:id="@+id/creatorFrequencyLayout"
+                    android:id="@+id/creatorMultipleNotificationsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/defaultBackground"
