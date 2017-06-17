@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,6 +17,7 @@ import java.util.GregorianCalendar;
 
 import de.hauke_stieler.rednimer.Common.DomainValue.TimeUnit;
 import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
+import de.hauke_stieler.rednimer.Common.Material.MultipleTimesNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.OneTimeNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
@@ -67,17 +67,16 @@ public class ReminderCreatorActivity extends AppCompatActivity {
             setNotificationLayoutVisibility(isChecked);
         });
 
-        Spinner dueDateEndSpinner = (Spinner)findViewById(R.id.creatorMultipleDueDatesEndSpinner);
+        Spinner dueDateEndSpinner = (Spinner) findViewById(R.id.creatorMultipleDueDatesEndSpinner);
         dueDateEndSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String neverString = dueDateEndSpinner.getContext().getResources().getStringArray(R.array.multipleDueDatesChoices)[0];
                 String selectedItem = (String) dueDateEndSpinner.getItemAtPosition(position);
 
-                if(selectedItem.equals(neverString)) {
+                if (selectedItem.equals(neverString)) {
                     setEndDateChooserVisibility(false);
-                }
-                else{
+                } else {
                     setEndDateChooserVisibility(true);
                 }
             }
@@ -106,7 +105,7 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         setVisible(R.id.creatorChooseEndDateTextView, visible);
     }
 
-    private void setVisible(int viewId, boolean visible){
+    private void setVisible(int viewId, boolean visible) {
         if (visible) {
             findViewById(viewId).setVisibility(View.VISIBLE);
         } else {
@@ -156,13 +155,16 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         // When checked, multiple notifications have been chosen
         boolean oneTimeNotification = !((SwitchCompat) findViewById(R.id.creatorNotificationSwitch)).isChecked();
 
-        if (oneTimeNotification) {
-            int timeBeforeDueDate = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
-            String timeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
+        int timeBeforeDueDate = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
+        String timeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
 
-            notificationSpecification = new OneTimeNotificationSpecification(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
-        } else {
-            Log.e("Create Reminder", "Multiple notifications not implemented yet!");
+        notificationSpecification = new OneTimeNotificationSpecification(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
+
+        if (!oneTimeNotification) {
+            int repetitionTime = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
+            String repetitionTimeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
+
+            notificationSpecification = new MultipleTimesNotificationSpecification((OneTimeNotificationSpecification) notificationSpecification, repetitionTime, TimeUnit.get(repetitionTimeUnit));
         }
 
         Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate, notificationSpecification);
