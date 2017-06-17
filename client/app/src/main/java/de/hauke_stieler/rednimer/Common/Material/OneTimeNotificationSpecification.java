@@ -14,20 +14,21 @@ public class OneTimeNotificationSpecification implements INotificationSpecificat
     private final Calendar _dueDate;
     private final Calendar _startingDate;
     private final int _timeBeforeDueDate;
-    private boolean _hasBeenRaised;
+    private int _amountOfRaisings; // amount of notifications which will be raised until due date
 
     /**
      * @param timeBeforeDueDate Amount of time before due date (e.g. in Weeks)
-     * @param timeUnit Unit if the {@code timeBeforeDueDate} param (e.g. Week, Day, ...)
+     * @param timeUnit          Unit if the {@code timeBeforeDueDate} param (e.g. Week, Day, ...)
      */
-    public OneTimeNotificationSpecification(Calendar dueDate, int timeBeforeDueDate, TimeUnit timeUnit){
+    public OneTimeNotificationSpecification(Calendar dueDate, int timeBeforeDueDate, TimeUnit timeUnit) {
         Contract.NotNull(dueDate);
-        Contract.Satisfy(timeBeforeDueDate>=0);
+        Contract.Satisfy(timeBeforeDueDate >= 0);
         Contract.NotNull(timeUnit);
 
         _dueDate = dueDate;
 
         _timeBeforeDueDate = timeBeforeDueDate * timeUnit.Milliseconds;
+        _amountOfRaisings = 2; // One notification before due date and one at due date
 
         _startingDate = (Calendar) dueDate.clone();
         _startingDate.add(Calendar.MILLISECOND, -_timeBeforeDueDate);
@@ -53,16 +54,16 @@ public class OneTimeNotificationSpecification implements INotificationSpecificat
 
     @Override
     public void setIsRaised() {
-        _hasBeenRaised = true;
+        if (_amountOfRaisings > 0) _amountOfRaisings--;
     }
 
     @Override
     public boolean hasBeenRaised() {
-        return _hasBeenRaised;
+        return _amountOfRaisings <= 1;
     }
 
     @Override
     public boolean isFinished() {
-        return isOneTimeNotification() && hasBeenRaised();
+        return _amountOfRaisings <= 0;
     }
 }

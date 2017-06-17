@@ -161,8 +161,8 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         notificationSpecification = new OneTimeNotificationSpecification(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
 
         if (!oneTimeNotification) {
-            int repetitionTime = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
-            String repetitionTimeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
+            int repetitionTime = Integer.parseInt(((EditText) findViewById(R.id.creatorMultipleNotificationsNumberEditText)).getText().toString());
+            String repetitionTimeUnit = ((Spinner) findViewById(R.id.creatorMultipleNotificationsUnitSpinner)).getSelectedItem().toString();
 
             notificationSpecification = new MultipleTimesNotificationSpecification((OneTimeNotificationSpecification) notificationSpecification, repetitionTime, TimeUnit.get(repetitionTimeUnit));
         }

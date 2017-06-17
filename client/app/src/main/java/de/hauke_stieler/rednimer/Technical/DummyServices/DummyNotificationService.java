@@ -7,9 +7,8 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -53,23 +52,29 @@ public class DummyNotificationService implements INotificationService {
     private Timer createTimer(Reminder reminder, Context context) {
         INotificationSpecification specification = reminder.getNotificationSpecification();
 
-        Log.i("start", "createTimer: "+ DateTimeFormatter.formatTime(specification.getStartingPoint()));
+        Log.i("start", "createTimer: " + DateTimeFormatter.formatTime(specification.getStartingPoint()));
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 raiseNotification(reminder.getTitle(), context);
-
-                if (specification.isFinished()){
-                    this.cancel();
-                    timer.cancel();
-                    timer.purge();
-                    return;
-                }
-
                 specification.setIsRaised();
 
+                // Show notification at due date:
+                if (specification.isFinished()) {
+                    try {
+                        Thread.sleep(reminder.getDueDate().getTime().getTime() - System.currentTimeMillis());
+
+                        raiseNotification(reminder.getTitle() + " actual", context);
+
+                        timer.cancel();
+                        this.cancel();
+                        timer.purge();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }, specification.getStartingPoint().getTime(), specification.getFrequencyInMillis());
 
@@ -99,8 +104,8 @@ public class DummyNotificationService implements INotificationService {
 
     public void vibrate(Context context) {
         Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
-        if(vibrator.hasVibrator()){
-            vibrator.vibrate(new long[]{0, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION/2, VIBRATION_DURATION, VIBRATION_DURATION}, -1);
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(new long[]{0, VIBRATION_DURATION / 2, VIBRATION_DURATION / 2, VIBRATION_DURATION / 2, VIBRATION_DURATION / 2, VIBRATION_DURATION, VIBRATION_DURATION}, -1);
         }
     }
 }
