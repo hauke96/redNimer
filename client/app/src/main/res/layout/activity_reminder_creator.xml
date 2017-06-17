@@ -190,15 +190,15 @@
                 <RelativeLayout
                     android:id="@+id/creatorMultipleDueDatesLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/creatorMultipleDueDatesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/creatorMultipleDueDatesUnitSpinner"
+                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:layout_marginRight="5dp"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:enabled="false"
                         android:text="Repeat every"
                         android:textSize="@dimen/text_font_size" />
@@ -210,6 +210,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginRight="5dp"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner"
                         android:ems="10"
                         android:enabled="false"
                         android:inputType="number"
@@ -220,10 +221,15 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
-                        android:layout_alignBottom="@+id/creatorMultipleDueDatesFrequencyEditText"
-                        android:layout_marginRight="5dp"
-                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_alignParentRight="true"
                         android:enabled="false" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp">
 
                     <TextView
                         android:id="@+id/creatorMultipleDueDatesEndsAtTextView"
@@ -231,7 +237,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
                         android:layout_marginRight="5dp"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner"
                         android:enabled="false"
                         android:text="Ends at: "
                         android:textSize="@dimen/text_font_size" />
@@ -240,9 +245,8 @@
                         android:id="@+id/creatorMultipleDueDatesEndSpinner"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
+                        android:layout_alignParentRight="true"/>
 
                 </RelativeLayout>
 
