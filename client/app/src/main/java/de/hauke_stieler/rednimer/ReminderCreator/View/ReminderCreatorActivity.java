@@ -48,9 +48,9 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         setDateText((TextView) findViewById(R.id.creatorChooseDateTextView), _selectedDate);
         setTimeText((TextView) findViewById(R.id.creatorChooseTimeTextView), _selectedDate);
 
-        toggleDueDateLayoutVisibility(false);
-        toggleNotificationLayoutVisibility(false);
-        toggleEndDateChooserVisibility(false);
+        setDueDateLayoutVisibility(false);
+        setNotificationLayoutVisibility(false);
+        setEndDateChooserVisibility(false);
 
         Contract.NotNull(_selectedDate);
         Contract.NotNull(_reminderService);
@@ -59,12 +59,12 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     private void registerListener() {
         SwitchCompat dueDateSwitchControl = (SwitchCompat) findViewById(R.id.creatorDueDateSwitch);
         dueDateSwitchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            toggleDueDateLayoutVisibility(isChecked);
+            setDueDateLayoutVisibility(isChecked);
         });
 
         SwitchCompat notificationSwitchControl = (SwitchCompat) findViewById(R.id.creatorNotificationSwitch);
         notificationSwitchControl.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            toggleNotificationLayoutVisibility(isChecked);
+            setNotificationLayoutVisibility(isChecked);
         });
 
         Spinner dueDateEndSpinner = (Spinner)findViewById(R.id.creatorMultipleDueDatesEndSpinner);
@@ -75,10 +75,10 @@ public class ReminderCreatorActivity extends AppCompatActivity {
                 String selectedItem = (String) dueDateEndSpinner.getItemAtPosition(position);
 
                 if(selectedItem.equals(neverString)) {
-                    toggleEndDateChooserVisibility(false);
+                    setEndDateChooserVisibility(false);
                 }
                 else{
-                    toggleEndDateChooserVisibility(true);
+                    setEndDateChooserVisibility(true);
                 }
             }
 
@@ -94,27 +94,23 @@ public class ReminderCreatorActivity extends AppCompatActivity {
         findViewById(R.id.creatorSaveButton).setOnClickListener(v -> saveReminder());
     }
 
-    private void toggleDueDateLayoutVisibility(boolean visible) {
-        if (visible) {
-            findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.GONE);
-        }
+    private void setDueDateLayoutVisibility(boolean visible) {
+        setVisible(R.id.creatorMultipleDueDatesLayout, visible);
     }
 
-    private void toggleNotificationLayoutVisibility(boolean visible) {
-        if (visible) {
-            findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.GONE);
-        }
+    private void setNotificationLayoutVisibility(boolean visible) {
+        setVisible(R.id.creatorMultipleNotificationsLayout, visible);
     }
 
-    private void toggleEndDateChooserVisibility(boolean visible) {
+    private void setEndDateChooserVisibility(boolean visible) {
+        setVisible(R.id.creatorChooseEndDateTextView, visible);
+    }
+
+    private void setVisible(int viewId, boolean visible){
         if (visible) {
-            findViewById(R.id.creatorChooseEndDateTextView).setVisibility(View.VISIBLE);
+            findViewById(viewId).setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.creatorChooseEndDateTextView).setVisibility(View.GONE);
+            findViewById(viewId).setVisibility(View.GONE);
         }
     }
 
