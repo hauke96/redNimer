@@ -7,14 +7,13 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
+import de.hauke_stieler.rednimer.Common.Material.NotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
@@ -50,7 +49,7 @@ public class DummyNotificationService implements INotificationService {
     }
 
     private Timer createTimer(Reminder reminder, Context context) {
-        INotificationSpecification specification = reminder.getNotificationSpecification();
+        NotificationSpecification specification = reminder.getNotificationSpecification();
 
         Log.i("start", "createTimer: " + DateTimeFormatter.formatTime(specification.getStartingPoint()));
 

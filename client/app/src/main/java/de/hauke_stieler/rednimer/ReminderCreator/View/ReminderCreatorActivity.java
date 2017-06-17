@@ -16,8 +16,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import de.hauke_stieler.rednimer.Common.DomainValue.TimeUnit;
-import de.hauke_stieler.rednimer.Common.Material.INotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.MultipleTimesNotificationSpecification;
+import de.hauke_stieler.rednimer.Common.Material.NotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.OneTimeNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
@@ -147,27 +147,25 @@ public class ReminderCreatorActivity extends AppCompatActivity {
     }
 
     private void saveReminder() {
-        TextView titleTextView = (TextView) findViewById(R.id.creatorTitleEditText);
-        TextView descriptionTextView = (TextView) findViewById(R.id.creatorDescriptionEditText);
-
-        INotificationSpecification notificationSpecification = null;
-
-        // When checked, multiple notifications have been chosen
-        boolean oneTimeNotification = !((SwitchCompat) findViewById(R.id.creatorNotificationSwitch)).isChecked();
+        String title = ((TextView) findViewById(R.id.creatorTitleEditText)).getText().toString();
+        String description = ((TextView) findViewById(R.id.creatorDescriptionEditText)).getText().toString();
+        NotificationSpecification notificationSpecification;
 
         int timeBeforeDueDate = Integer.parseInt(((EditText) findViewById(R.id.creatorOneNotificationNumberEditText)).getText().toString());
         String timeUnit = ((Spinner) findViewById(R.id.creatorOneNotificationUnitSpinner)).getSelectedItem().toString();
 
-        notificationSpecification = new OneTimeNotificationSpecification(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
+        boolean oneTimeNotificationChosen = !((SwitchCompat) findViewById(R.id.creatorNotificationSwitch)).isChecked();
 
-        if (!oneTimeNotification) {
+        if (oneTimeNotificationChosen) {
+            notificationSpecification = OneTimeNotificationSpecification.getInstance(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit));
+        } else {
             int repetitionTime = Integer.parseInt(((EditText) findViewById(R.id.creatorMultipleNotificationsNumberEditText)).getText().toString());
             String repetitionTimeUnit = ((Spinner) findViewById(R.id.creatorMultipleNotificationsUnitSpinner)).getSelectedItem().toString();
 
-            notificationSpecification = new MultipleTimesNotificationSpecification((OneTimeNotificationSpecification) notificationSpecification, repetitionTime, TimeUnit.get(repetitionTimeUnit));
+            notificationSpecification = MultipleTimesNotificationSpecification.getInstance(_selectedDate, timeBeforeDueDate, TimeUnit.get(timeUnit), repetitionTime, TimeUnit.get(repetitionTimeUnit));
         }
 
-        Reminder reminder = new Reminder(titleTextView.getText().toString(), descriptionTextView.getText().toString(), _selectedDate, notificationSpecification);
+        Reminder reminder = new Reminder(title, description, _selectedDate, notificationSpecification);
 
         _reminderService.add(reminder);
 

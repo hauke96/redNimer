@@ -9,58 +9,27 @@ import juard.contract.Contract;
  * Created by hauke on 11.06.17.
  */
 
-public class MultipleTimesNotificationSpecification implements INotificationSpecification {
-    private OneTimeNotificationSpecification _oneTimeNotificationSpecification;
-    private int _repetitionTimeInMillis;
-    private TimeUnit _repetitionTimeUnit;
-    private int _amountOfRaisings; // amount of notifications which will be raised until due date
+public class MultipleTimesNotificationSpecification extends NotificationSpecification {
+    public MultipleTimesNotificationSpecification(Calendar startDate, int repetitionTimeInMillis, int amountOfNotifications) {
+        super(startDate, repetitionTimeInMillis, amountOfNotifications);
+    }
 
-    /**
-     * Create a specification for multiple repeating notifications.
-     *
-     * @param oneTimeNotificationSpecification The start time of the notification
-     * @param repetitionTime                   The time between notifications
-     * @param repetitionTimeUnit               The unit in which the repetition is (e.g. minutes)
-     */
-    public MultipleTimesNotificationSpecification(OneTimeNotificationSpecification oneTimeNotificationSpecification, int repetitionTime, TimeUnit repetitionTimeUnit) {
-        Contract.NotNull(oneTimeNotificationSpecification);
+    public static MultipleTimesNotificationSpecification getInstance(Calendar dueDate, int timeBeforeDueDate, TimeUnit timeUnit, int repetitionTime, TimeUnit repetitionTimeUnit) {
+        Contract.NotNull(dueDate);
+        Contract.Satisfy(timeBeforeDueDate >= 0);
+        Contract.NotNull(timeUnit);
         Contract.Satisfy(repetitionTime > 0);
         Contract.NotNull(repetitionTimeUnit);
 
-        _oneTimeNotificationSpecification = oneTimeNotificationSpecification;
-        _repetitionTimeInMillis = repetitionTime * repetitionTimeUnit.Milliseconds;
-        _repetitionTimeUnit = repetitionTimeUnit;
+        int amountOfNotifications = timeBeforeDueDate / repetitionTime + 1; // One notification before due date and one at due date
+        int repetitionTimeInMillis = repetitionTime * repetitionTimeUnit.Milliseconds;
 
-        _amountOfRaisings = oneTimeNotificationSpecification.getFrequencyInMillis() / _repetitionTimeInMillis + 1; // +1 for the actual notification at the due date
-    }
+        Calendar startingDate = (Calendar) dueDate.clone();
+        startingDate.add(Calendar.MILLISECOND, -timeBeforeDueDate * timeUnit.Milliseconds);
+        // start at beginning of minute:
+        startingDate.set(Calendar.SECOND, 0);
+        startingDate.set(Calendar.MILLISECOND, 0);
 
-    @Override
-    public Calendar getStartingPoint() {
-        return _oneTimeNotificationSpecification.getStartingPoint();
-    }
-
-    @Override
-    public int getFrequencyInMillis() {
-        return _repetitionTimeInMillis;
-    }
-
-    @Override
-    public boolean isOneTimeNotification() {
-        return false;
-    }
-
-    @Override
-    public void setIsRaised() {
-        if (_amountOfRaisings > 0) _amountOfRaisings--;
-    }
-
-    @Override
-    public boolean hasBeenRaised() {
-        return _amountOfRaisings <= 1; // when one notification is left, all other has been raised
-    }
-
-    @Override
-    public boolean isFinished() {
-        return _amountOfRaisings <= 0;
+        return new MultipleTimesNotificationSpecification(startingDate, repetitionTimeInMillis, amountOfNotifications);
     }
 }

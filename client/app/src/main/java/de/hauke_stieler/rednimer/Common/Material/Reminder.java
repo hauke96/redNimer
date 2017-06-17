@@ -12,14 +12,14 @@ public class Reminder {
     private final String _title;
     private final String _description;
     private final Calendar _dueDate;
-    private final INotificationSpecification _notificationSpecification;
+    private final NotificationSpecification _notificationSpecification;
 
     @Deprecated
     public Reminder(String title, String description, Calendar dueDate) {
-        this(title, description, dueDate, new OneTimeNotificationSpecification(dueDate, 10, TimeUnit.MINUTE));
+        this(title, description, dueDate, OneTimeNotificationSpecification.getInstance(dueDate, 10, TimeUnit.MINUTE));
     }
 
-    public Reminder(String title, String description, Calendar dueDate, INotificationSpecification notificationSpecification) {
+    public Reminder(String title, String description, Calendar dueDate, NotificationSpecification notificationSpecification) {
         //TODO contracts
 
         _title = title;
@@ -40,7 +40,7 @@ public class Reminder {
         return DateTimeFormatter.formatDate(_dueDate) + " at " + DateTimeFormatter.formatTime(_dueDate);
     }
 
-    public INotificationSpecification getNotificationSpecification(){
+    public NotificationSpecification getNotificationSpecification(){
         return _notificationSpecification;
     }
 }
