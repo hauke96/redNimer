@@ -187,68 +187,92 @@
                 <!--
                 Multiple due dates layout
                 -->
-                <RelativeLayout
+                <LinearLayout
                     android:id="@+id/creatorMultipleDueDatesLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/creatorMultipleDueDatesTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
-                        android:layout_marginRight="5dp"
-                        android:enabled="false"
-                        android:text="Repeat every"
-                        android:textSize="@dimen/text_font_size" />
+                    <!--
+                    Repeat every ...
+                    -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/creatorMultipleDueDatesFrequencyEditText"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="number"
-                        android:text="1" />
+                        <TextView
+                            android:id="@+id/creatorMultipleDueDatesTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
+                            android:layout_marginRight="5dp"
+                            android:text="Repeat every"
+                            android:textSize="@dimen/text_font_size" />
 
-                    <Spinner
-                        android:id="@+id/creatorMultipleDueDatesUnitSpinner"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
-                        android:layout_alignParentRight="true"
-                        android:enabled="false" />
-                </RelativeLayout>
+                        <EditText
+                            android:id="@+id/creatorMultipleDueDatesFrequencyEditText"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="1" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
+                        <Spinner
+                            android:id="@+id/creatorMultipleDueDatesUnitSpinner"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/creatorMultipleDueDatesFrequencyEditText"
+                            android:layout_alignParentRight="true"
+                            android:entries="@array/dateFrequencies" />
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/creatorMultipleDueDatesEndsAtTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
-                        android:layout_marginRight="5dp"
-                        android:enabled="false"
-                        android:text="Ends at: "
-                        android:textSize="@dimen/text_font_size" />
+                    <!--
+                    Ends at ...
+                    -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <Spinner
-                        android:id="@+id/creatorMultipleDueDatesEndSpinner"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentRight="true"/>
+                        <TextView
+                            android:id="@+id/creatorMultipleDueDatesEndsAtTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
+                            android:layout_marginRight="5dp"
+                            android:text="Ends"
+                            android:textSize="@dimen/text_font_size" />
 
-                </RelativeLayout>
+                        <Spinner
+                            android:id="@+id/creatorMultipleDueDatesEndSpinner"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_toEndOf="@id/creatorMultipleDueDatesEndsAtTextView"
+                            android:entries="@array/multipleDueDatesChoices"/>
+
+                        <TextView
+                            android:id="@+id/creatorChooseEndDateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
+                            android:layout_alignParentRight="true"
+                            android:height="40dp"
+                            android:background="@color/colorPrimaryVeryLight"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="(choose date)"
+                            android:textSize="@dimen/text_font_size"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -346,7 +370,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:entries="@array/frequencies" />
+                        android:entries="@array/timeFrequencies" />
 
                 </RelativeLayout>
 
@@ -388,7 +412,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:entries="@array/frequencies" />
+                        android:entries="@array/timeFrequencies" />
 
                 </RelativeLayout>
 

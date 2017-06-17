@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class ReminderCreatorActivity extends AppCompatActivity {
 
         toggleDueDateLayoutVisibility(false);
         toggleNotificationLayoutVisibility(false);
+        toggleEndDateChooserVisibility(false);
 
         Contract.NotNull(_selectedDate);
         Contract.NotNull(_reminderService);
@@ -65,25 +67,54 @@ public class ReminderCreatorActivity extends AppCompatActivity {
             toggleNotificationLayoutVisibility(isChecked);
         });
 
+        Spinner dueDateEndSpinner = (Spinner)findViewById(R.id.creatorMultipleDueDatesEndSpinner);
+        dueDateEndSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String neverString = dueDateEndSpinner.getContext().getResources().getStringArray(R.array.multipleDueDatesChoices)[0];
+                String selectedItem = (String) dueDateEndSpinner.getItemAtPosition(position);
+
+                if(selectedItem.equals(neverString)) {
+                    toggleEndDateChooserVisibility(false);
+                }
+                else{
+                    toggleEndDateChooserVisibility(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         findViewById(R.id.creatorChooseDateTextView).setOnClickListener(v -> creatorChooseDateTextView_OnClick((TextView) v));
         findViewById(R.id.creatorChooseTimeTextView).setOnClickListener(v -> creatorChooseTimeTextView_OnClick((TextView) v));
 
         findViewById(R.id.creatorSaveButton).setOnClickListener(v -> saveReminder());
     }
 
-    private void toggleDueDateLayoutVisibility(boolean multipleDueDatesLayoutChosen) {
-        if (multipleDueDatesLayoutChosen) {
+    private void toggleDueDateLayoutVisibility(boolean visible) {
+        if (visible) {
             findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.creatorMultipleDueDatesLayout).setVisibility(View.GONE);
         }
     }
 
-    private void toggleNotificationLayoutVisibility(boolean multipleNotificationsLayoutChosen) {
-        if (multipleNotificationsLayoutChosen) {
+    private void toggleNotificationLayoutVisibility(boolean visible) {
+        if (visible) {
             findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.creatorMultipleNotificationsLayout).setVisibility(View.GONE);
+        }
+    }
+
+    private void toggleEndDateChooserVisibility(boolean visible) {
+        if (visible) {
+            findViewById(R.id.creatorChooseEndDateTextView).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.creatorChooseEndDateTextView).setVisibility(View.GONE);
         }
     }
 

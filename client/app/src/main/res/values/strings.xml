@@ -1,10 +1,22 @@
 <resources>
     <string name="app_name">redNimer</string>
 
-    <string-array name="frequencies">
+    <string-array name="timeFrequencies">
         <item>Minute</item>
         <item>Hour</item>
         <item>Day</item>
         <item>Week</item>
+    </string-array>
+
+    <string-array name="dateFrequencies">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+
+    <string-array name="multipleDueDatesChoices">
+        <item>never</item>
+        <item>at</item>
     </string-array>
 </resources>
