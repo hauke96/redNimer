@@ -28,12 +28,12 @@ These features ensure a basic usage of redNimer. Nice things like security or sh
 * Save reminder in local database
 * Save reminder on remote server
 * Specify the kind of notification
- * ~~One time (notifies one time before due date)~~
- * Multiple times (notifies at a given frequency before due date)
- * Specify night times. During these times there'll be no notification
+	 * ~~One time (notifies one time before due date)~~
+	 * ~~Multiple times (notifies at a given frequency before due date)~~
+	 * Specify night times. During these times there'll be no notification
 * ~~Locally create a notification~~
 * Get a push call from the server and then create a notification
- * Use a local service if there's no connection to the server
+	 * Use a local service if there's no connection to the server
 * Get optional notifications via E-Mail
 
 ## Future music/Ideas
@@ -41,6 +41,6 @@ These features ensure a basic usage of redNimer. Nice things like security or sh
 * Use SSL to communicate with server
 * Create account on server
 * Share reminder with other people
- * First create a sharing-token (Number, unique name, QR-Code, whatever)
- * Later (this is the real goal) search user and add them as friends
+	 * First create a sharing-token (Number, unique name, QR-Code, whatever)
+	 * Later (this is the real goal) search user and add them as friends
 * Create desktop application
