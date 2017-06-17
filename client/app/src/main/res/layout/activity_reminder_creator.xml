@@ -196,12 +196,12 @@
                         android:id="@+id/creatorMultipleDueDatesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
-                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:enabled="false"
                         android:text="Repeat every"
-                        android:textSize="@dimen/text_font_size" />
+                        android:textSize="@dimen/text_font_size"
+                        android:layout_alignBottom="@+id/creatorMultipleDueDatesUnitSpinner"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
 
                     <EditText
                         android:id="@+id/creatorMultipleDueDatesFrequencyEditText"
@@ -224,6 +224,25 @@
                         android:layout_marginRight="5dp"
                         android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText"
                         android:enabled="false" />
+
+                    <TextView
+                        android:id="@+id/creatorMultipleDueDatesEndsAtTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:enabled="false"
+                        android:text="Ends at: "
+                        android:textSize="@dimen/text_font_size"
+                        android:layout_alignBaseline="@+id/creatorMultipleDueDatesEndSpinner"
+                        android:layout_toStartOf="@+id/creatorMultipleDueDatesUnitSpinner" />
+
+                    <Spinner
+                        android:id="@+id/creatorMultipleDueDatesEndSpinner"
+                        android:layout_width="150dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/creatorMultipleDueDatesFrequencyEditText"
+                        android:layout_toEndOf="@+id/creatorMultipleDueDatesFrequencyEditText" />
 
                 </RelativeLayout>
 
