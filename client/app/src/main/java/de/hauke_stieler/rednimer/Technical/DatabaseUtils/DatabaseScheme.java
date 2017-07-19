@@ -23,10 +23,6 @@ public final class DatabaseScheme {
     public static String SPECIFICATION_COLUMN_REPETITION_TIME = "repetition_time_in_millis";
     public static String SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS = "amount_of_notifications";
 
-    public static Map<Integer, String> UPGRADE_SCRIPT = new HashMap<Integer, String>() {{
-        put(1, UPDATE_SCRIPT_1);
-    }};
-
     /*
     CREATE TABLE rednimer
     (
@@ -48,7 +44,7 @@ public final class DatabaseScheme {
         PRIMARY KEY (id)
     );
     */
-    public static String UPDATE_SCRIPT_1 = "CREATE TABLE " + REMINDER_TABLE_NAME + "(" +
+    public static String CREATE_SCRIPT = "CREATE TABLE IF NOT EXISTS " + REMINDER_TABLE_NAME + "(" +
             REMINDER_COLUMN_ID + " VARCHAR(40) NOT NULL," +
             REMINDER_COLUMN_TITLE + " TEXT NOT NULL," +
             REMINDER_COLUMN_DESCRIPTION + " TEXT," +
@@ -57,9 +53,11 @@ public final class DatabaseScheme {
             "PRIMARY KEY (id)," +
             "FOREIGN KEY (notification_specification) REFERENCES notification_specification(id));" +
 
-            "CREATE TABLE " + SPECIFICATION_TABLE_NAME + "(" +
+            "CREATE TABLE IF NOT EXISTS " + SPECIFICATION_TABLE_NAME + "(" +
             SPECIFICATION_COLUMN_ID + "VARCHAR(40) NOT NULL," +
             SPECIFICATION_COLUMN_START_DATE + "LONG NOT NULL," +
             SPECIFICATION_COLUMN_REPETITION_TIME + "INT NOT NULL," +
             SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS + "INT NOT NULL, PRIMARY KEY (id));";
+
+    public static String DROP_DATABASE_SCRIPT = "DROP DATABASE IF EXISTS " + DATABASE_NAME;
 }
