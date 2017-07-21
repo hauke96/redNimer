@@ -1,13 +1,11 @@
 package de.hauke_stieler.rednimer.Technical.DatabaseUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by hauke on 19.07.17.
  */
 
 public final class DatabaseScheme {
+    public static final int VERSION = 1;
     public static String DATABASE_NAME = "rednimer.db";
 
     public static String REMINDER_TABLE_NAME = "reminder";

@@ -36,6 +36,7 @@ public class Reminder {
         return (Calendar) _dueDate.clone();
     }
 
+    //TODO next to this: add getter for real description
     public String getDueDateDescription() {
         return DateTimeFormatter.formatDate(_dueDate) + " at " + DateTimeFormatter.formatTime(_dueDate);
     }
