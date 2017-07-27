@@ -8,28 +8,37 @@ import juard.contract.Contract;
  * Created by hauke on 27.07.17.
  */
 
-public class ID {
+public class ID<T> {
     private final String _value;
 
-    private ID(String value){
+    private final Class<T> _type;
+
+    private ID(Class<T> type, String value){
+        Contract.NotNull(type);
         Contract.NotNullOrEmpty(value);
 
         _value = value;
+        _type = type;
     }
 
-    public static ID create(){
+    public static <T> ID<T> create(Class<T> type){
         //TODO create new SHA-256 ID
         throw new UnsupportedOperationException();
     }
 
-    public static ID create(String value){
+    public static <T> ID<T> create(Class<T> type, String value){
+        Contract.NotNull(type);
         Contract.NotNullOrEmpty(value);
 
-        return new ID(value);
+        return new ID(type, value);
     }
 
     public String getValue() {
         return _value;
+    }
+
+    public Class<T> getType(){
+        return _type;
     }
 
     @Override
@@ -38,7 +47,10 @@ public class ID {
             return false;
         }
 
-        return getValue().equals(((ID) o).getValue());
+        ID other = (ID) o;
+
+        return getValue().equals(other.getValue()) &&
+                getType().equals(other.getType());
     }
 
     @Override
