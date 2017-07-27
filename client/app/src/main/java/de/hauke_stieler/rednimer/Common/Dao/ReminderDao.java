@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.NotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
@@ -28,7 +30,7 @@ public class ReminderDao implements IReminderDao{
     }
 
     @Override
-    public Reminder getAllReminder() {
+    public List<Reminder> getAllReminder() {
         String reminderTable = DatabaseScheme.REMINDER_TABLE_NAME;
         String specificationTable = DatabaseScheme.SPECIFICATION_TABLE_NAME;
 
@@ -38,20 +40,34 @@ public class ReminderDao implements IReminderDao{
 
         Cursor cursor = dbHelper.runQuery(query);
 
-        String specificationId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_ID));
-        int specificationRepititionTime = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_REPETITION_TIME));
-        int specificationAmountOfNotifications = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS));
-        long specificationStartDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_START_DATE));
+        List<Reminder> result = new ArrayList<>();
 
-        String reminderId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_ID));
-        String reminderTitle = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_TITLE));
-        String reminderDescription = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DESCRIPTION));
-        long reminderDueDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DUE_DATE));
+        do {
+            String specificationId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_ID));
+            int specificationRepetitionTime = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_REPETITION_TIME));
+            int specificationAmountOfNotifications = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS));
+            long specificationStartDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_START_DATE));
 
-        Date date = new Date(specificationStartDate);
-        //TODO create specification and reminder here
-        //new NotificationSpecification(date, specificationRepititionTime, specificationAmountOfNotifications);
-        return null;
+            Calendar specificationCalendar = GregorianCalendar.getInstance();
+            specificationCalendar.setTimeInMillis(specificationStartDate);
+
+            NotificationSpecification specification = new NotificationSpecification(specificationCalendar, specificationRepetitionTime, specificationAmountOfNotifications);
+
+            String reminderId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_ID));
+            String reminderTitle = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_TITLE));
+            String reminderDescription = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DESCRIPTION));
+            long reminderDueDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DUE_DATE));
+
+            Calendar reminderCalendar = GregorianCalendar.getInstance();
+            reminderCalendar.setTimeInMillis(reminderDueDate);
+
+            Reminder reminder = new Reminder(reminderTitle, reminderDescription, reminderCalendar, specification);
+
+            result.add(reminder);
+
+        }while(cursor.moveToNext());
+
+        return result;
     }
 
     @Override
