@@ -62,7 +62,7 @@ public class DayOverview extends Fragment {
 
         _reminderDao.init(getContext());
 
-        new DummyDataFactory(Locator.get(IReminderService.class));
+//        new DummyDataFactory(Locator.get(IReminderService.class));
     }
 
     @Override

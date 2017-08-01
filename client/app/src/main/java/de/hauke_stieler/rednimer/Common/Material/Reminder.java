@@ -34,7 +34,7 @@ public class Reminder {
     public Reminder(ID<Reminder> id, String title, String description, Calendar dueDate, NotificationSpecification notificationSpecification) {
         Contract.NotNull(id);
         Contract.NotNullOrEmpty(title);
-        Contract.NotNullOrEmpty(description);
+        Contract.NotNull(description);
         Contract.NotNull(dueDate);
         Contract.NotNull(notificationSpecification);
 

@@ -30,6 +30,8 @@ public class ReminderServiceImpl implements IReminderService {
 
         if(!_reminderDao.hasReminder(reminder.getId())) {
             _reminderDao.add(reminder);
+
+            ReminderAdded.fireEvent(new Reminder[]{reminder});
         }
         else{
             Log.e(this.getClass().getSimpleName(), "add: Reminder already exists!");
