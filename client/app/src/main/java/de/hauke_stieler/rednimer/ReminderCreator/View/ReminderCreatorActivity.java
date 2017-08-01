@@ -20,7 +20,7 @@ import de.hauke_stieler.rednimer.Common.Material.MultipleTimesNotificationSpecif
 import de.hauke_stieler.rednimer.Common.Material.NotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.OneTimeNotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.R;
 import juard.contract.Contract;
@@ -29,14 +29,14 @@ import juard.injection.Locator;
 public class ReminderCreatorActivity extends AppCompatActivity {
     private Calendar _selectedDate;
 
-    private AbstractReminderService _reminderService;
+    private IReminderService _reminderService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_creator);
 
-        _reminderService = Locator.get(AbstractReminderService.class);
+        _reminderService = Locator.get(IReminderService.class);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Reminder editor");

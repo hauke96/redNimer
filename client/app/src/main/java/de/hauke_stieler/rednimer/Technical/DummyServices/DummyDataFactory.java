@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import juard.contract.Contract;
 
 /**
@@ -12,7 +12,7 @@ import juard.contract.Contract;
  */
 
 public class DummyDataFactory {
-    public DummyDataFactory(AbstractReminderService reminderService){
+    public DummyDataFactory(IReminderService reminderService){
         Contract.NotNull(reminderService);
 
         GregorianCalendar calendar = new GregorianCalendar();

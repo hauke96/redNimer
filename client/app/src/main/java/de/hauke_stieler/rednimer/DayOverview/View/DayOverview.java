@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import java.util.Calendar;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
@@ -29,7 +29,7 @@ public class DayOverview extends Fragment {
     private boolean _isResumed;
 
     public DayOverview() {
-        AbstractReminderService reminderService = Locator.get(AbstractReminderService.class);
+        IReminderService reminderService = Locator.get(IReminderService.class);
         notificationService = Locator.get(INotificationService.class);
 
         reminderService.ReminderAdded.add(objects -> {

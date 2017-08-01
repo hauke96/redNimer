@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.ReminderListAdapter;
 import de.hauke_stieler.rednimer.R;
@@ -22,7 +22,7 @@ import juard.contract.Contract;
 
 public class ReminderLister extends Fragment {
 
-    private AbstractReminderService _reminderService;
+    private IReminderService _reminderService;
     private Calendar _date;
     private ArrayAdapter<Reminder> _listItemAdapter;
 
@@ -30,7 +30,7 @@ public class ReminderLister extends Fragment {
 
     }
 
-    public static ReminderLister newInstance(AbstractReminderService reminderService, Calendar date) {
+    public static ReminderLister newInstance(IReminderService reminderService, Calendar date) {
         Contract.NotNull(reminderService);
         Contract.NotNull(date);
 

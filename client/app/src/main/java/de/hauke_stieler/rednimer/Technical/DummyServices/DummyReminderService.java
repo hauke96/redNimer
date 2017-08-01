@@ -4,20 +4,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.AbstractReminderService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
 import juard.contract.Contract;
 
 /**
  * Created by hauke on 30.05.17.
  */
-public class DummyReminderService implements AbstractReminderService {
+public class DummyReminderService implements IReminderService {
 
     private Map<String, List<Reminder>> _reminderMap;
     private DateFormat _dateFormatter;
