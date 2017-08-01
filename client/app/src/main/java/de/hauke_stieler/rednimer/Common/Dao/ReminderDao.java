@@ -3,6 +3,7 @@ package de.hauke_stieler.rednimer.Common.Dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,33 +45,45 @@ public class ReminderDao implements IReminderDao{
         List<Reminder> result = new ArrayList<>();
 
         do {
-            String specificationId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_ID));
-            int specificationRepetitionTime = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_REPETITION_TIME));
-            int specificationAmountOfNotifications = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS));
-            long specificationStartDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_START_DATE));
+            NotificationSpecification specification = getNotificationSpecification(cursor);
 
-            Calendar specificationCalendar = GregorianCalendar.getInstance();
-            specificationCalendar.setTimeInMillis(specificationStartDate);
-
-            NotificationSpecification specification = new NotificationSpecification(specificationCalendar, specificationRepetitionTime, specificationAmountOfNotifications);
-
-            String reminderId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_ID));
-            String reminderTitle = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_TITLE));
-            String reminderDescription = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DESCRIPTION));
-            long reminderDueDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DUE_DATE));
-
-            Calendar reminderCalendar = GregorianCalendar.getInstance();
-            reminderCalendar.setTimeInMillis(reminderDueDate);
-
-            ID<Reminder> id = ID.create(Reminder.class, reminderId);
-
-            Reminder reminder = new Reminder(id, reminderTitle, reminderDescription, reminderCalendar, specification);
+            Reminder reminder = getReminder(cursor, specification);
 
             result.add(reminder);
 
         }while(cursor.moveToNext());
 
         return result;
+    }
+
+    @NonNull
+    private NotificationSpecification getNotificationSpecification(Cursor cursor) {
+        String specificationIdString = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_ID));
+        int specificationRepetitionTime = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_REPETITION_TIME));
+        int specificationAmountOfNotifications = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS));
+        long specificationStartDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.SPECIFICATION_COLUMN_START_DATE));
+
+        Calendar specificationCalendar = GregorianCalendar.getInstance();
+        specificationCalendar.setTimeInMillis(specificationStartDate);
+
+        ID<NotificationSpecification> specificationId = ID.create(NotificationSpecification.class, specificationIdString);
+
+        return new NotificationSpecification(specificationId, specificationCalendar, specificationRepetitionTime, specificationAmountOfNotifications);
+    }
+
+    @NonNull
+    private Reminder getReminder(Cursor cursor, NotificationSpecification specification) {
+        String reminderIdString = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_ID));
+        String reminderTitle = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_TITLE));
+        String reminderDescription = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DESCRIPTION));
+        long reminderDueDate = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseScheme.REMINDER_COLUMN_DUE_DATE));
+
+        Calendar reminderCalendar = GregorianCalendar.getInstance();
+        reminderCalendar.setTimeInMillis(reminderDueDate);
+
+        ID<Reminder> reminderId = ID.create(Reminder.class, reminderIdString);
+
+        return new Reminder(reminderId, reminderTitle, reminderDescription, reminderCalendar, specification);
     }
 
     @Override
