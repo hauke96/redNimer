@@ -17,6 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DatabaseScheme.DATABASE_NAME, null, DatabaseScheme.VERSION);
+
+        context.deleteDatabase(DatabaseScheme.DATABASE_NAME);
     }
 
     @Override
@@ -27,6 +29,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // The local database is just a cache from the remote one. Therefore we won't do any versioning here or keep data.
+        resetDatabase(db);
+    }
+
+    private void resetDatabase(SQLiteDatabase db) {
         db.execSQL(DatabaseScheme.DROP_DATABASE_SCRIPT);
         db.execSQL(DatabaseScheme.CREATE_SCRIPT);
     }
@@ -36,13 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Contract.NotNull(tableName);
         Contract.Satisfy(!tableName.trim().isEmpty());
 
-        long result = getWritableDatabase().insert(tableName, null, values);
-
-        if (result == -1) {
+        try {
+            getWritableDatabase().insertOrThrow(tableName, null, values);
+        } catch (Exception e) {
             String errorMessage = "Error while writing to database table " + tableName;
 
             Log.e("insert", errorMessage);
-            throw new SQLiteException(errorMessage);
+            Log.e("insert", e.getMessage());
+            throw new SQLiteException(errorMessage, e);
         }
     }
 

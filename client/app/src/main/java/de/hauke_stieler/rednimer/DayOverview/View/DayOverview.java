@@ -13,13 +13,15 @@ import android.view.ViewGroup;
 
 import java.util.Calendar;
 
+import de.hauke_stieler.rednimer.Common.Dao.IReminderDao;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
-import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
+import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.Technical.DateTimeFormatter;
 import de.hauke_stieler.rednimer.DayOverview.Adapter.DayOverviewPagerAdapter;
 import de.hauke_stieler.rednimer.R;
 import de.hauke_stieler.rednimer.ReminderCreator.View.ReminderCreatorActivity;
+import de.hauke_stieler.rednimer.Technical.DummyService.DummyDataFactory;
 import juard.contract.Contract;
 import juard.injection.Locator;
 
@@ -27,6 +29,7 @@ public class DayOverview extends Fragment {
 
     private final INotificationService notificationService;
     private boolean _isResumed;
+    private IReminderDao _reminderDao;
 
     public DayOverview() {
         IReminderService reminderService = Locator.get(IReminderService.class);
@@ -41,14 +44,25 @@ public class DayOverview extends Fragment {
         });
     }
 
-    public static DayOverview newInstance() {
+    public static DayOverview newInstance(IReminderDao reminderDao) {
         DayOverview fragment = new DayOverview();
+        fragment.init(reminderDao);
         return fragment;
+    }
+
+    private void init(IReminderDao reminderDao) {
+        Contract.NotNull(reminderDao);
+
+        _reminderDao = reminderDao;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        _reminderDao.init(getContext());
+
+        new DummyDataFactory(Locator.get(IReminderService.class));
     }
 
     @Override

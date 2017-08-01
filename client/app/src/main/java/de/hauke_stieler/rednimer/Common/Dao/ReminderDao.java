@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -26,7 +28,10 @@ public class ReminderDao implements IReminderDao {
 
     DatabaseHelper dbHelper;
 
-    public ReminderDao(Context context) {
+    public ReminderDao() {
+    }
+
+    public void init(Context context) {
         Contract.NotNull(context);
 
         dbHelper = new DatabaseHelper(context);
@@ -34,21 +39,34 @@ public class ReminderDao implements IReminderDao {
 
     @Override
     public List<Reminder> getAllReminder() {
+        Log.i(getClass().getSimpleName(), "getAllReminder");
+
         String reminderTable = DatabaseScheme.REMINDER_TABLE_NAME;
         String specificationTable = DatabaseScheme.SPECIFICATION_TABLE_NAME;
 
-        String query = "SELECT * FROM " + reminderTable +
-                " INNER JOIN " + specificationTable +
-                " ON " + reminderTable + "." + DatabaseScheme.REMINDER_COLUMN_ID + "=" + specificationTable + "." + DatabaseScheme.SPECIFICATION_COLUMN_ID;
+//        String query = "SELECT * FROM " + reminderTable +
+//                " INNER JOIN " + specificationTable +
+//                " ON " + reminderTable + "." + DatabaseScheme.REMINDER_COLUMN_ID + "=" + specificationTable + "." + DatabaseScheme.SPECIFICATION_COLUMN_ID;
+        String query = "SELECT * FROM " + reminderTable;
 
         Cursor cursor = dbHelper.runQuery(query);
 
         List<Reminder> result = new ArrayList<>();
 
-        do {
-            NotificationSpecification specification = getNotificationSpecification(cursor);
+        if (cursor.getCount() <= 0) {
+            return result;
+        }
 
-            Reminder reminder = getReminder(cursor, specification);
+        if(cursor.isBeforeFirst()) {
+            cursor.moveToNext();
+        }
+
+        do {
+//            NotificationSpecification specification = getNotificationSpecification(cursor);
+
+//            Reminder reminder = getReminder(cursor, specification);
+
+            Reminder reminder = getReminder(cursor, new NotificationSpecification(new GregorianCalendar(), 1, 1));
 
             result.add(reminder);
 
@@ -94,7 +112,9 @@ public class ReminderDao implements IReminderDao {
 
     @Override
     public boolean hasReminder(ID<Reminder> id) {
-        String query = MessageFormat.format("SELECT TOP 1 FROM {0} WHERE {1} = {2}", DatabaseScheme.REMINDER_TABLE_NAME, DatabaseScheme.REMINDER_COLUMN_ID, id.getValue());
+        Log.i(getClass().getSimpleName(), MessageFormat.format("hasReminder: ID<{0}> = {1}", id.getType().getSimpleName(), id.getValue()));
+
+        String query = MessageFormat.format("SELECT * FROM {0} WHERE {1}=\"{2}\" LIMIT 1", DatabaseScheme.REMINDER_TABLE_NAME, DatabaseScheme.REMINDER_COLUMN_ID, id.getValue());
 
         Cursor cursor = dbHelper.runQuery(query);
 
@@ -103,11 +123,14 @@ public class ReminderDao implements IReminderDao {
 
     @Override
     public void add(Reminder reminder) {
+        Log.i(getClass().getSimpleName(), MessageFormat.format("add: Title: {0}, ID<{1}> = {2}", reminder.getTitle(), reminder.getId().getType().getSimpleName(), reminder.getId().getValue()));
+
         Contract.NotNull(reminder);
         Contract.Satisfy(!hasReminder(reminder.getId()));
 
         ContentValues values = new ContentValues();
 
+        values.put(DatabaseScheme.REMINDER_COLUMN_ID, reminder.getId().getValue());
         values.put(DatabaseScheme.REMINDER_COLUMN_TITLE, reminder.getTitle());
         values.put(DatabaseScheme.REMINDER_COLUMN_DESCRIPTION, reminder.getDueDateDescription());
         values.put(DatabaseScheme.REMINDER_COLUMN_DUE_DATE, reminder.getDueDate().getTimeInMillis());

@@ -1,5 +1,7 @@
 package de.hauke_stieler.rednimer.Technical.DatabaseUtils;
 
+import java.text.MessageFormat;
+
 /**
  * Created by hauke on 19.07.17.
  */
@@ -47,7 +49,7 @@ public final class DatabaseScheme {
             REMINDER_COLUMN_TITLE + " TEXT NOT NULL," +
             REMINDER_COLUMN_DESCRIPTION + " TEXT," +
             REMINDER_COLUMN_DUE_DATE + " LONG NOT NULL," +
-            REMINDER_COLUMN_NOTIFICATION_SPECIFICATION + " VARCHAR(40) NOT NULL," +
+            REMINDER_COLUMN_NOTIFICATION_SPECIFICATION + " VARCHAR(40)," + // TODO add NOT NULL constraint
             "PRIMARY KEY (id)," +
             "FOREIGN KEY (notification_specification) REFERENCES notification_specification(id));" +
 
@@ -57,5 +59,9 @@ public final class DatabaseScheme {
             SPECIFICATION_COLUMN_REPETITION_TIME + "INT NOT NULL," +
             SPECIFICATION_COLUMN_AMOUNT_OF_NOTIFICATIONS + "INT NOT NULL, PRIMARY KEY (id));";
 
-    public static String DROP_DATABASE_SCRIPT = "DROP DATABASE IF EXISTS " + DATABASE_NAME;
+    public static String DROP_DATABASE_SCRIPT = dropTable(REMINDER_TABLE_NAME) + dropTable(SPECIFICATION_TABLE_NAME);
+
+    private static String dropTable(String tableName) {
+        return MessageFormat.format("DROP TABLE IF EXISTS {0};", tableName);
+    }
 }
