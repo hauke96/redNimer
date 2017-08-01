@@ -30,28 +30,6 @@ public class DummyReminderService extends AbstractReminderService {
 
         _reminderMap = new HashMap<>();
         _dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        GregorianCalendar calendar = new GregorianCalendar();
-
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 00);
-        add(new Reminder("Einkaufen", "* Nudeln\n* Wasser\n* Bier", calendar));
-
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 30);
-        add(new Reminder("Lernen", "Für Mathe lernen", calendar));
-
-        // go to next day
-        calendar.add(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        calendar.set(Calendar.MINUTE, 00);
-        add(new Reminder("Arzt", "Um 13:15 Zahnarzt", calendar));
-
-        // go to next day
-        calendar.add(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 30);
-        add(new Reminder("Freunde", "Freunde in der Kneipe treffen", calendar));
     }
 
     @Override

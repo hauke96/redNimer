@@ -9,6 +9,7 @@ import juard.event.EventArgs;
 /**
  * Created by hauke on 30.05.17.
  */
+//TODO why is this an abstract class? if not necessary, turn into interface
 public abstract class AbstractReminderService {
     public final EventArgs ReminderAdded = new EventArgs();
 
