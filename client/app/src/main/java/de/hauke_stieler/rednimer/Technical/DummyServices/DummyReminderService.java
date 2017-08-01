@@ -17,7 +17,7 @@ import juard.contract.Contract;
 /**
  * Created by hauke on 30.05.17.
  */
-public class DummyReminderService extends AbstractReminderService {
+public class DummyReminderService implements AbstractReminderService {
 
     private Map<String, List<Reminder>> _reminderMap;
     private DateFormat _dateFormatter;

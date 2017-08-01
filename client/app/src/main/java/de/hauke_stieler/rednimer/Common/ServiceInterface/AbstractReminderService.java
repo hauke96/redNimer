@@ -10,10 +10,10 @@ import juard.event.EventArgs;
  * Created by hauke on 30.05.17.
  */
 //TODO why is this an abstract class? if not necessary, turn into interface
-public abstract class AbstractReminderService {
-    public final EventArgs ReminderAdded = new EventArgs();
+public interface AbstractReminderService {
+    EventArgs ReminderAdded = new EventArgs();
 
-    public abstract void add(Reminder reminder);
+    void add(Reminder reminder);
 
-    public abstract List<Reminder> getAll(Calendar date);
+    List<Reminder> getAll(Calendar date);
 }
