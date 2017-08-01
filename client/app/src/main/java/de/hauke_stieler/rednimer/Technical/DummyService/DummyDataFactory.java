@@ -1,4 +1,4 @@
-package de.hauke_stieler.rednimer.Technical.DummyServices;
+package de.hauke_stieler.rednimer.Technical.DummyService;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -2,9 +2,9 @@ package de.hauke_stieler.rednimer.AppContext;
 
 import de.hauke_stieler.rednimer.Common.ServiceInterface.IReminderService;
 import de.hauke_stieler.rednimer.Common.ServiceInterface.INotificationService;
-import de.hauke_stieler.rednimer.Technical.DummyServices.DummyDataFactory;
-import de.hauke_stieler.rednimer.Technical.DummyServices.DummyNotificationService;
-import de.hauke_stieler.rednimer.Technical.DummyServices.DummyReminderService;
+import de.hauke_stieler.rednimer.Technical.DummyService.DummyDataFactory;
+import de.hauke_stieler.rednimer.Technical.DummyService.DummyNotificationService;
+import de.hauke_stieler.rednimer.Technical.DummyService.DummyReminderService;
 import juard.injection.Locator;
 
 /**
