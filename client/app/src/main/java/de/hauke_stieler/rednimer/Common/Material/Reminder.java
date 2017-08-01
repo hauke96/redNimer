@@ -21,11 +21,11 @@ public class Reminder {
         this(ID.create(Reminder.class), title, description, dueDate);
     }
 
-    @Deprecated
     public Reminder(ID<Reminder> id, String title, String description, Calendar dueDate) {
         this(id, title, description, dueDate, OneTimeNotificationSpecification.getInstance(dueDate, 10, TimeUnit.MINUTE));
     }
 
+    @Deprecated
     public Reminder(String title, String description, Calendar dueDate, NotificationSpecification notificationSpecification) {
         this(ID.create(Reminder.class), title, description, dueDate, notificationSpecification);
     }

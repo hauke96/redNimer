@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.hauke_stieler.rednimer.Common.DomainValue.ID;
 import de.hauke_stieler.rednimer.Common.Material.NotificationSpecification;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 import de.hauke_stieler.rednimer.Technical.DatabaseUtils.DatabaseHelper;
@@ -61,7 +62,9 @@ public class ReminderDao implements IReminderDao{
             Calendar reminderCalendar = GregorianCalendar.getInstance();
             reminderCalendar.setTimeInMillis(reminderDueDate);
 
-            Reminder reminder = new Reminder(reminderTitle, reminderDescription, reminderCalendar, specification);
+            ID<Reminder> id = ID.create(Reminder.class, reminderId);
+
+            Reminder reminder = new Reminder(id, reminderTitle, reminderDescription, reminderCalendar, specification);
 
             result.add(reminder);
 
