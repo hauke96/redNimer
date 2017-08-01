@@ -2,6 +2,7 @@ package de.hauke_stieler.rednimer.Common.Dao;
 
 import java.util.List;
 
+import de.hauke_stieler.rednimer.Common.DomainValue.ID;
 import de.hauke_stieler.rednimer.Common.Material.Reminder;
 
 /**
@@ -11,7 +12,7 @@ import de.hauke_stieler.rednimer.Common.Material.Reminder;
 public interface IReminderDao {
     List<Reminder> getAllReminder();
 
-    boolean hasReminder(String id);
+    boolean hasReminder(ID<Reminder> id);
 
     void add(Reminder reminder);
 }

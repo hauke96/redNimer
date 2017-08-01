@@ -15,6 +15,7 @@ public class Reminder {
     private final String _description;
     private final Calendar _dueDate;
     private final NotificationSpecification _notificationSpecification;
+    private ID<Reminder> _id;
 
     @Deprecated
     public Reminder(String title, String description, Calendar dueDate) {
@@ -37,10 +38,15 @@ public class Reminder {
         Contract.NotNull(dueDate);
         Contract.NotNull(notificationSpecification);
 
+        _id = id;
         _title = title;
         _dueDate = (Calendar) dueDate.clone();
         _description = description;
         _notificationSpecification = notificationSpecification;
+    }
+
+    public ID<Reminder> getId() {
+        return _id;
     }
 
     public String getTitle() {
