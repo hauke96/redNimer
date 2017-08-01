@@ -9,7 +9,7 @@ import de.hauke_stieler.rednimer.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    static{
+    static {
         // Create all registrations for services
         ServiceLocator.registerAll();
     }

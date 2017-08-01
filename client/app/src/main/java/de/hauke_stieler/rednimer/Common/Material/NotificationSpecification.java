@@ -35,7 +35,7 @@ public class NotificationSpecification {
         _amountOfNotifications = amountOfNotifications;
     }
 
-    public ID<NotificationSpecification> getId(){
+    public ID<NotificationSpecification> getId() {
         return _id;
     }
 

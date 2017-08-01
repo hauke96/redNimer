@@ -60,8 +60,8 @@ public class ID<T> {
             stringBuilder.append(random.nextLong());
 
             random = new Random();
-            stringBuilder.append(random.nextDouble()*random.nextFloat());
-            stringBuilder.append(random.nextGaussian()+random.nextLong());
+            stringBuilder.append(random.nextDouble() * random.nextFloat());
+            stringBuilder.append(random.nextGaussian() + random.nextLong());
 
             String text = stringBuilder.toString();
 

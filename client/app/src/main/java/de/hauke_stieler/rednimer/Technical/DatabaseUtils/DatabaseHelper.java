@@ -31,14 +31,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DatabaseScheme.CREATE_SCRIPT);
     }
 
-    public void insert(ContentValues values, String tableName){
+    public void insert(ContentValues values, String tableName) {
         Contract.NotNull(values);
         Contract.NotNull(tableName);
         Contract.Satisfy(!tableName.trim().isEmpty());
 
         long result = getWritableDatabase().insert(tableName, null, values);
 
-        if(result == -1){
+        if (result == -1) {
             String errorMessage = "Error while writing to database table " + tableName;
 
             Log.e("insert", errorMessage);

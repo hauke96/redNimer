@@ -21,7 +21,7 @@ import juard.contract.Contract;
  * Created by hauke on 21.07.17.
  */
 
-public class ReminderDao implements IReminderDao{
+public class ReminderDao implements IReminderDao {
 
     DatabaseHelper dbHelper;
 
@@ -36,9 +36,9 @@ public class ReminderDao implements IReminderDao{
         String reminderTable = DatabaseScheme.REMINDER_TABLE_NAME;
         String specificationTable = DatabaseScheme.SPECIFICATION_TABLE_NAME;
 
-        String query = "SELECT * FROM "+ reminderTable +
-                " INNER JOIN "+ specificationTable +
-                " ON "+ reminderTable +"."+DatabaseScheme.REMINDER_COLUMN_ID + "="+ specificationTable +"."+DatabaseScheme.SPECIFICATION_COLUMN_ID;
+        String query = "SELECT * FROM " + reminderTable +
+                " INNER JOIN " + specificationTable +
+                " ON " + reminderTable + "." + DatabaseScheme.REMINDER_COLUMN_ID + "=" + specificationTable + "." + DatabaseScheme.SPECIFICATION_COLUMN_ID;
 
         Cursor cursor = dbHelper.runQuery(query);
 
@@ -51,7 +51,7 @@ public class ReminderDao implements IReminderDao{
 
             result.add(reminder);
 
-        }while(cursor.moveToNext());
+        } while (cursor.moveToNext());
 
         return result;
     }
